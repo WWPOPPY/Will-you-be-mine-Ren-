@@ -358,6 +358,15 @@
         @keyframes popHeart { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 80% { transform: translateX(-50%) scale(1.5); opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
         @keyframes floatUpBalloon { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(360deg); } }
 
+        /* HIDE YOUTUBE PLAYER (But keep it accessible) */
+        .hidden-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            opacity: 0;
+            z-index: -100;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -368,7 +377,6 @@
     <ul class="circles">
         <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
         <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-        <!-- Hidden extra items for specific animations -->
     </ul>
     
     <!-- Music & Steps -->
@@ -387,11 +395,6 @@
         </div>
     </div>
     
-    <audio id="bg-music" loop autoplay>
-        <!-- ใช้ไฟล์เพลงจากเครื่องที่อยู่ในโฟลเดอร์เดียวกัน -->
-        <source src="No One Else - _ OFFICIAL MV.mp3" type="audio/mpeg">
-    </audio>
-
     <div id="app-container">
 
         <!-- 1. INTRO -->
@@ -706,6 +709,9 @@
         </div>
 
     </div>
+    
+    <!-- YOUTUBE PLAYER CONTAINER (HIDDEN) -->
+    <div id="yt-player" class="hidden-player"></div>
 
     <script>
         /*******************************************************
@@ -759,7 +765,7 @@
          *******************************************************/
 
         let state = { pin: "", quizIndex: 0, promiseCount: 0, talkIndex: 0, cameraStream: null };
-        const audio = document.getElementById('bg-music');
+        // NOTE: 'audio' variable is removed as we switched to YouTube API
 
         // Global Effects
         document.addEventListener('click', (e) => {
@@ -775,45 +781,67 @@
         function animateBg(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.y-=p.speed;if(p.y<-50)p.y=canvas.height+50;ctx.font=p.size+'px serif';ctx.fillText(p.text,p.x,p.y)}); requestAnimationFrame(animateBg); }
         animateBg();
 
-        // ** ONE-TAP AUTOPLAY LOGIC **
-        // Browser won't let us play until user interacts. 
-        // We bind a one-time click listener to the whole document to catch the first tap.
-        document.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    const btn = document.getElementById('music-status');
-                    const icon = document.querySelector('.music-btn-top i');
-                    btn.innerText = "Playing";
-                    icon.className = "fas fa-compact-disc";
-                }).catch(e => console.log("Autoplay blocked/waiting for interaction"));
+        /* --- YOUTUBE API LOGIC --- */
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '0',
+                width: '0',
+                videoId: 'M8Ao4NeNhFE',
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'M8Ao4NeNhFE' // Required for loop
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Attempt autoplay (might be blocked by browser)
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            const btn = document.getElementById('music-status');
+            const icon = document.querySelector('.music-btn-top i');
+            
+            if (event.data == YT.PlayerState.PLAYING) {
+                 btn.innerText = "Playing";
+                 icon.className = "fas fa-compact-disc fa-spin";
+            } else {
+                 btn.innerText = "Paused";
+                 icon.className = "fas fa-play";
+                 icon.classList.remove('fa-spin');
             }
-        }, { once: true }); // Only run once on first click
+        }
 
         // Start Journey Function (Triggers Play + Navigation)
         function startJourney() {
-            toggleAudio(); // Try to play music
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
             navigate('screen-intro', 'screen-lock', 1); // Move to next screen
         }
 
         // Audio Toggle
         function toggleAudio(){ 
-            const btn=document.getElementById('music-status'); 
-            const icon=document.querySelector('.music-btn-top i');
-
-            if(audio.paused){ 
-                audio.play()
-                .then(() => {
-                    btn.innerText="Pause"; 
-                    icon.className="fas fa-pause";
-                })
-                .catch((e)=>{
-                    console.log("Waiting for user interaction to play audio");
-                }); 
-            }
-            else{ 
-                audio.pause(); 
-                btn.innerText="Play"; 
-                icon.className="fas fa-compact-disc"; 
+            if (!player || !player.getPlayerState) return;
+            
+            const playerState = player.getPlayerState();
+            if (playerState == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
             }
         }
         
