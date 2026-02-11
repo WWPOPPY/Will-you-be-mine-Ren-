@@ -403,12 +403,12 @@
                 <div class="music-disc-large" id="intro-disc">
                     <div class="music-disc-inner"><i class="fas fa-music" style="color:white; font-size: 1.5rem;"></i></div>
                 </div>
-                <h2 style="color: var(--secondary);">Love Journey V4 🌹</h2>
-                <p>17 บทพิสูจน์ความรักของเรา...<br>ฉบับอัปเกรด!</p>
+                <h2 style="color: var(--secondary);">My Valentine 🌹</h2>
+                <p>for the one I love<br>ของขวัญวาเลนไทน์ปีนี้ คือการมีเธฮอยู่ข้าง ๆ เหมือนทุกวัน</p>
                 <div style="width: 100%;">
                     <!-- ลบปุ่ม "เปิดเพลง" ออก เหลือแต่ปุ่มเริ่ม -->
                     <button class="btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1.2rem;" onclick="startJourney()">
-                        เริ่มเลย ❤️
+                        ไปต่อเลย 🤍
                     </button>
                 </div>
             </div>
@@ -420,7 +420,7 @@
                 <button class="btn-back" onclick="navigate('screen-lock', 'screen-intro', 0)"><i class="fas fa-chevron-left"></i></button>
                 <i class="fas fa-lock lock-icon" style="font-size:2.5rem; margin-bottom:10px; color:var(--secondary);"></i>
                 <h2>ใส่รหัสหน่อยนะ</h2>
-                <p>Hint: วันเกิดนู่ยิ้ม (8 หลัก)</p>
+                <p>Hint: วันเกิดนู่ยิ้ม</p>
                 <div class="pin-display" id="pin-dots">
                     <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
                     <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
@@ -438,7 +438,7 @@
         <div id="screen-quiz" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-quiz', 'screen-lock', 1)"><i class="fas fa-chevron-left"></i></button>
-                <h2>Mission 1: แฟนพันธุ์แท้</h2>
+                <h2>Mission 1: วัดใจ</h2>
                 <h3 id="quiz-q" style="color: var(--accent); margin: 20px 0; font-size: 1.3rem;">คำถาม...</h3>
                 <div id="quiz-opts" style="width: 100%;"></div>
             </div>
@@ -449,7 +449,7 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-hug', 'screen-quiz', 2)"><i class="fas fa-arrow-left"></i></button>
                 <h2>Mission 2: ภารกิจกอด ❤️</h2>
-                <p id="hug-instruction">กดปุ่มแล้วกอดกัน 10 วินาที<br>เพื่อรับ "รางวัลพิเศษ"!</p>
+                <p id="hug-instruction">กดปุ่มแล้วกอดกัน 10 วินาที<br>เพื่อรับ "ของขวัญพิเศษ"!</p>
                 
                 <div class="hug-anim-container">
                     <div id="hug-btn" class="hug-emoji" onclick="startHugMission()">🫂</div>
@@ -459,7 +459,7 @@
                 <div id="hug-progress" class="hug-progress-bg"><div id="hug-fill" class="hug-progress-fill"></div></div>
                 
                 <div id="mystery-section" style="display:none; flex-direction:column; align-items:center;">
-                    <h3 style="color:var(--accent); margin-top:15px;">เลือกกล่องรางวัลเลย!</h3>
+                    <h3 style="color:var(--accent); margin-top:15px;">เลือกกล่องสุ่ม รางวัลเลย!</h3>
                     <div class="mystery-container" style="display:flex;">
                         <div class="mystery-box" onclick="openMysteryBox(0)">🎁</div>
                         <div class="mystery-box" onclick="openMysteryBox(1)">🎁</div>
@@ -470,7 +470,7 @@
                 <h3 id="hug-msg" style="color:var(--secondary); font-size:1.4rem; opacity:0; margin-top:15px; min-height: 30px;"></h3>
                 
                 <button id="btn-hug-next" class="btn-primary" style="display: none;" onclick="navigate('screen-hug', 'screen-scratch', 4)">
-                    ไปด่านต่อไป <i class="fas fa-arrow-right"></i>
+                    ยังมีอีกนะ... <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
@@ -479,7 +479,7 @@
         <div id="screen-scratch" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-scratch', 'screen-hug', 3)"><i class="fas fa-arrow-left"></i></button>
-                <h2>Mission 3: ความลับ 🤫</h2>
+                <h2>ความลับของเรา 🤫</h2>
                 <p>ขูดหน้าจอเพื่อดูรูปนะ</p>
                 <div id="scratch-wrapper">
                     <img id="secret-img" src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80">
@@ -487,7 +487,7 @@
                 </div>
                 <h3 id="reveal-msg" style="opacity:0; color:var(--accent); font-size:1.3rem; transition:0.5s; margin-top:5px;">น่ารักที่สุดเลย!</h3>
                 <button id="btn-scratch-next" class="btn-primary" style="display: none; margin-top: 10px;" onclick="navigate('screen-scratch', 'screen-cake', 5)">
-                    ไปด่านต่อไป <i class="fas fa-arrow-right"></i>
+                    ยังมีอีกนะ... <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
@@ -516,11 +516,11 @@
         <div id="screen-letter" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-letter', 'screen-cake', 5)"><i class="fas fa-arrow-left"></i></button>
-                <h2>ถึง... เธอคนดี</h2>
+                <h2>จดหมายถึงคนอ่าน ที่ชื่อ ก้อง </h2>
                 <div class="letter-paper">
                     <span id="typewriter-text"></span><span class="cursor">|</span>
                 </div>
-                <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...เค้าเอง ❤️</p>
+                <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...คนที่ตั้งใจ(รัก)ก้องที่สุด ❤️</p>
                 <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 7)">
                     ไปถ่ายรูปกัน 📸
                 </button>
@@ -599,11 +599,11 @@
                 <p>กดเพื่อประทับตราสัญญา</p>
                 <div class="promise-list">
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะรักเธอคนเดียว</span>
+                        <span>จะชอบก้องคนเดียว</span>
                         <div class="stamp-mark"><i class="fas fa-heart"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะพาไปกินของอร่อย</span>
+                        <span>จะพาก้องไปกินของอร่อย</span>
                         <div class="stamp-mark"><i class="fas fa-utensils"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
@@ -647,7 +647,7 @@
                     </div>
                     <div class="diary-page" style="width:50%; height:100%; position:absolute; top:0; left:50%; background:#fffcf5; border:1px solid #ddd; padding:10px; display:flex; justify-content:center; align-items:center; z-index:1; border-radius:0 5px 5px 0;">
                         <!-- EDIT: ข้อความในไดอารี่ -->
-                        <p>วันนี้เป็นวันที่ดีที่สุดเลย<br>ขอบคุณที่มีเธอเข้ามา<br>รักนะครับ ❤️</p>
+                        <p>วันนี้เป็นวันที่ดีที่สุดเลย<br>ขอบคุณที่มีก้องเข้ามา<br>ในชีวิตครับ ❤️</p>
                     </div>
                 </div>
                 <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-diary', 'screen-stay', 14)">ไปต่อ ➜</button>
@@ -658,9 +658,9 @@
         <div id="screen-stay" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 13)"><i class="fas fa-arrow-left"></i></button>
-                <div class="couple-emoji">👩‍❤️‍👨</div>
+                <div class="couple-emoji">👨‍❤️‍👨</div>
                 <h2 style="font-size:2rem; color:var(--accent);">อยู่ด้วยกันนานๆ นะ</h2>
-                <p>รักที่สุดเลยยยย ❤️</p>
+                <p>น่ารักที่สุดเลยยยย ❤️</p>
                 <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 15)">ดูเวลาของเรา ⏳</button>
             </div>
         </div>
@@ -696,7 +696,7 @@
                 <div class="cartoon-scene" id="cartoon-scene">
                     <div class="toon-char boy">👦</div>
                     <div class="kiss-heart">💖</div>
-                    <div class="toon-char girl">👧</div>
+                    <div class="toon-char girl">👦</div>
                 </div>
 
                 <!-- Bouquet Popup -->
@@ -710,8 +710,19 @@
 
     </div>
     
-    <!-- YOUTUBE PLAYER CONTAINER (HIDDEN) -->
-    <div id="yt-player" class="hidden-player"></div>
+    <!-- YOUTUBE PLAYER (HIDDEN) -->
+    <iframe
+        id="yt-player"
+        class="hidden-player"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/M8Ao4NeNhFE?si=P6bCPADufxvpcOZT&enablejsapi=1&controls=0&rel=0&playlist=afPnIMti1oo"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+    ></iframe>
 
     <script>
         /*******************************************************
@@ -723,28 +734,28 @@
             passcode: "13092549", 
             
             // 2. วันที่เริ่มคบกัน (ปี-เดือน-วันTเวลา)
-            startDate: "2026-02-06T00:00:00", 
+            startDate: "2026-02-06T00:20:00", 
 
             // 3. คำถามแฟนพันธุ์แท้ (แก้คำถาม, ตัวเลือก, และเลขข้อที่ถูก เริ่มนับจาก 0)
             quiz: [
-                { q: "เราเจอกันครั้งแรกที่ไหน?", opts: ["โรงเรียน", "ห้าง", "ทะเล", "ร้านกาแฟ"], a: 3 },
-                { q: "ของกินที่เค้าชอบที่สุด?", opts: ["ชาบู", "หมูกระทะ", "ซูชิ", "ส้มตำ"], a: 1 },
-                { q: "เดทแรกเราไปทำอะไรกัน?", opts: ["ดูหนัง", "กินข้าว", "เดินสวน", "ขับรถเล่น"], a: 0 }
+                { q: "เราเจอกันครั้งแรกที่ไหน?", opts: ["โรงเรียน", "ห้าง", "ทะเล", "สวนสาธารณะ"], a: 3 },
+                { q: "น้ำดื่มที่ไวท์ชอบที่สุด?", opts: ["Purra", "Ichitan pH Plus (อิชิตัน น้ำด่าง)", "Singha", "Mont Fleur"], a: 1 },
+                { q: "เดทแรกเราไปทำอะไรกัน?", opts: ["ปั่นเรือเป็ด", "เดินห้าง", "ไปทะเล", "ขับรถเล่น"], a: 0 }
             ],
 
             // 4. รางวัลในกล่องสุ่ม (3 อย่าง)
             prizes: [
-                "บอกรักดังๆ ❤️", 
+                "บอกชอบดังๆ ❤️", 
                 "พาไปกินของอร่อย 🍱", 
                 "พาไปเที่ยว 1 ที่ 🏖️"
             ],
 
             // 5. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ
             gallery: [
-                { src: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?w=600", caption: "รูปคู่ใบแรกของเรา 📸" },
-                { src: "https://images.unsplash.com/photo-1516589178581-a7726952b195?w=600", caption: "ทริปทะเลแสนสุข 🌊" },
+                { src: "https://drive.google.com/file/d/1X2IWTOO97hLz9QOxGf5x4yROp3c8V4-9/view?usp=drivesdk", caption: "รูปคู่ใบแรกของเรา 📸" },
+                { src: "https://images.unsplash.com/photo-1516589178581-a7726952b195?w=600", caption: "ทริปไปปั้นเป็ดกันครั้งแรก 🐤" },
                 { src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️" },
-                { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600", caption: "รักเธอที่สุดเลย 🌹" }
+                { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600", caption: "ก้องน่ารักที่สุดเลย 🌹" }
             ],
 
             // 6. คำถาม Deep Talk
@@ -757,7 +768,7 @@
             ],
 
             // 7. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
-            letter: "สุขสันต์วันวาเลนไทน์นะครับคนดี ขอบคุณที่เข้ามาเป็นความสดใสในโลกของเค้านะ..."
+            letter: "สุขสันวันวาเลนไทน์นะก้าอง ก้องคงรู้อยู่แล้วว่าไวท์ไม่ใช่คนพูดหวานเก่ง ไม่ถนัดเรื่องแสดงความรู้สึกซึ้งๆ เท่าไหร่ บางทีอาจจะดูนิ่งไปบ้าง แต่ไวท์อยากให้ก้องรู้นะครับว่า... ในความนิ่งนั้น ข้างในมันเต็มไปด้วยความรู้สึกดีๆ เสมอ เชื่อไหม... ทุกครั้งที่เราได้โทรคุยกัน แค่ได้ยินเสียงก้อง มันเหมือนระยะทางหรือความห่างไกลมันหายไปหมดเลย มันเหมือนก้องมานั่งอยู่ข้างๆ ไวท์ตรงนี้จริงๆ มันเป็นช่วงเวลาที่ไวท์มีความสุขและสบายใจที่สุด ไวท์ชอบเวลาก้องยิ้มนะ เพราะรอยยิ้มของก้องมันเหมาะสมที่สุดแล้วกับคำว่า เธฮคือความสดใสของโลกใบนี้ ไม่ว่าวันนั้นไวท์จะเจออะไรมา แค่เห็นก้องยิ้ม โลกของไวท์มันก็ดู อ่อนโยน ขึ้นทันที ขอบคุณจริงๆ ที่เข้ามาเป็นความสบายใจและเป็นพลังบวกให้กัน ไม่รู้ว่าอนาคตข้างหน้าจะเป็นยังไง ไวท์ไม่อยากสัญญาในสิ่งที่ยังมาไม่ถึง แต่สิ่งที่ไวท์มั่นใจที่สุดใน วันนี้ คือ... ไวท์อยากมีก้องอยู่ข้างๆ แบบนี้ไปเรื่อยๆ ภูมิใจในตัวก้องเสมอนะครับ เก่งมากแล้วนะ ยิ้มให้ไวท์ดูบ่อยๆ นะขอบคุณที่เข้ามาเป็นความสดใสในโลกของไวทืนะ แล้วก้องล่ะครับ... ในโลกของก้อง ยังอยากมีไวท์อยู่ข้างๆ แบบนี้มั้ย?"
         };
 
         /*******************************************************
@@ -765,7 +776,6 @@
          *******************************************************/
 
         let state = { pin: "", quizIndex: 0, promiseCount: 0, talkIndex: 0, cameraStream: null };
-        // NOTE: 'audio' variable is removed as we switched to YouTube API
 
         // Global Effects
         document.addEventListener('click', (e) => {
@@ -781,43 +791,18 @@
         function animateBg(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.y-=p.speed;if(p.y<-50)p.y=canvas.height+50;ctx.font=p.size+'px serif';ctx.fillText(p.text,p.x,p.y)}); requestAnimationFrame(animateBg); }
         animateBg();
 
-        /* --- YOUTUBE API LOGIC --- */
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        /* --- YOUTUBE IFRAME LOGIC --- */
+        let playerFrame = null;
+        let isMusicPlaying = false;
 
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('yt-player', {
-                height: '0',
-                width: '0',
-                videoId: 'M8Ao4NeNhFE',
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'M8Ao4NeNhFE' // Required for loop
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // Attempt autoplay (might be blocked by browser)
-            event.target.playVideo();
-        }
-
-        function onPlayerStateChange(event) {
+        function setMusicButtonState(playing) {
             const btn = document.getElementById('music-status');
             const icon = document.querySelector('.music-btn-top i');
-            
-            if (event.data == YT.PlayerState.PLAYING) {
+
+            if (playing) {
                  btn.innerText = "Playing";
-                 icon.className = "fas fa-compact-disc fa-spin";
+                 icon.className = "fas fa-compact-disc";
+                 icon.classList.add('fa-spin');
             } else {
                  btn.innerText = "Paused";
                  icon.className = "fas fa-play";
@@ -825,23 +810,45 @@
             }
         }
 
+        function sendPlayerCommand(func, args = []) {
+            if (!playerFrame || !playerFrame.contentWindow) return;
+            playerFrame.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func, args }),
+                'https://www.youtube.com'
+            );
+        }
+
+        function playMusic() {
+            sendPlayerCommand('playVideo');
+            isMusicPlaying = true;
+            setMusicButtonState(true);
+        }
+
+        function pauseMusic() {
+            sendPlayerCommand('pauseVideo');
+            isMusicPlaying = false;
+            setMusicButtonState(false);
+        }
+
+        window.addEventListener('load', () => {
+            playerFrame = document.getElementById('yt-player');
+            setMusicButtonState(false);
+        });
+
         // Start Journey Function (Triggers Play + Navigation)
         function startJourney() {
-            if (player && player.playVideo) {
-                player.playVideo();
-            }
+            playMusic();
             navigate('screen-intro', 'screen-lock', 1); // Move to next screen
         }
 
         // Audio Toggle
         function toggleAudio(){ 
-            if (!player || !player.getPlayerState) return;
-            
-            const playerState = player.getPlayerState();
-            if (playerState == YT.PlayerState.PLAYING) {
-                player.pauseVideo();
+            if (!playerFrame) return;
+
+            if (isMusicPlaying) {
+                pauseMusic();
             } else {
-                player.playVideo();
+                playMusic();
             }
         }
         
@@ -891,7 +898,7 @@
 
         function loadQuiz(){ 
             if(state.quizIndex>=CONFIG.quiz.length){ 
-                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',3)">ไปด่านต่อไป ➜</button>`; 
+                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! ภูมิใจในตัวเธอ 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',3)">ไปกันต่อเลย ➜</button>`; 
                 fireConfetti(); return; 
             }
             const q=CONFIG.quiz[state.quizIndex]; document.getElementById('quiz-q').innerText=q.q;
@@ -908,7 +915,7 @@
             document.getElementById('hug-btn').style.display='none';
             document.getElementById('hug-timer').style.display='block';
             document.getElementById('hug-progress').style.display='block';
-            document.getElementById('hug-instruction').innerText = "กอดแน่นๆ นะ...";
+            document.getElementById('hug-instruction').innerText = "กอดแน่นๆ นะ... ";
             
             let t=10; 
             const timer=setInterval(()=>{
