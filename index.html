@@ -2,40 +2,853 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Love Journey: 17 Chapters of Us ❤️</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Mali:wght@300;400;600;700&family=Pacifico&family=Sarabun:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
+        :root {
+            --primary: #ff8fa3;
+            --secondary: #ff4d6d;
+            --accent: #c9184a;
+            --dark-text: #590d22;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 15px 40px rgba(255, 77, 109, 0.25);
+            --card-width-mobile: 90%;
+            --card-width-desktop: 850px;
+        }
+
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; outline: none; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Mali', cursive; }
+
         body {
-            background-color: #ffe6e6;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffecec, #ffccd5);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex; justify-content: center; align-items: center;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill:%23ff4d6d;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 16 16, auto;
+        }
+
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        #bg-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        #app-container { width: 100%; height: 100%; position: relative; z-index: 10; }
+
+        /* SCREENS */
+        .screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transform: scale(0.9) translateY(30px); filter: blur(10px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); padding: 20px;
+        }
+        .screen.active { opacity: 1; visibility: visible; transform: scale(1) translateY(0); filter: blur(0); z-index: 20; }
+        .screen.exit { opacity: 0; transform: scale(1.1) translateY(-50px) rotate(-2deg); filter: blur(5px); z-index: 5; pointer-events: none; }
+
+        /* CARD */
+        .card {
+            background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 3px solid var(--glass-border); box-shadow: var(--glass-shadow);
+            border-radius: 40px; padding: 30px; width: var(--card-width-mobile); max-width: 450px;
+            text-align: center; position: relative; overflow: visible;
+            animation: floatCard 6s ease-in-out infinite;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 450px;
+        }
+        @media (min-width: 1024px) {
+            .card { max-width: var(--card-width-desktop); padding: 40px; border-radius: 50px; min-height: 550px; gap: 15px; }
+            h1 { font-size: 3.5rem !important; } h2 { font-size: 2.5rem !important; } p { font-size: 1.3rem !important; }
+            .btn-primary, .btn-outline { font-size: 1.3rem !important; padding: 15px 40px !important; }
+            .music-disc-large { width: 160px !important; height: 160px !important; }
+            .scratch-area { width: 450px !important; height: 320px !important; }
+            .letter-paper { min-height: 320px !important; font-size: 1.4rem !important; line-height: 45px !important; }
+            .cake-stage { height: 280px !important; } .base-cake { font-size: 12rem !important; } .topping { font-size: 3rem !important; }
+            .camera-body { width: 400px !important; height: 280px !important; }
+            .photo-print { width: 240px !important; height: 300px !important; }
+            .timer-val { font-size: 3.5rem !important; }
+            .diary-book { width: 450px !important; height: 350px !important; }
+            .writing-svg { max-width: 900px !important; }
+            .bouquet-img { font-size: 12rem !important; }
+        }
+        @keyframes floatCard { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+        h1, h2, h3 { color: var(--dark-text); margin-top: 0; text-shadow: 2px 2px 0px rgba(255,255,255,0.6); }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; }
+        p { color: #666; font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; }
+
+        /* BUTTONS */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white; border: none; padding: 15px 40px; font-size: 1.1rem;
+            border-radius: 50px; cursor: pointer; font-family: 'Mali', cursive; font-weight: 700;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4); transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 15px;
+        }
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6); }
+        .btn-outline {
+            background: white; color: var(--secondary); border: 3px solid var(--secondary);
+            padding: 12px 35px; font-size: 1.1rem; border-radius: 50px; cursor: pointer;
+            font-family: 'Mali', cursive; font-weight: 700; transition: 0.3s; margin-top: 15px;
+        }
+        .btn-outline:hover { background: var(--secondary); color: white; transform: translateY(-3px); }
+        .btn-back {
+            position: absolute; top: 25px; left: 25px; width: 45px; height: 45px;
+            border-radius: 50%; background: rgba(255,255,255,0.9); border: none;
+            color: var(--secondary); font-size: 1.2rem; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .btn-back:hover { transform: scale(1.1); background: white; }
+
+        /* NAV DOTS */
+        .step-dots {
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 5px; z-index: 990;
+            background: rgba(255,255,255,0.6); padding: 6px 12px; border-radius: 20px;
+            backdrop-filter: blur(5px); max-width: 98vw; flex-wrap: wrap; justify-content: center;
+        }
+        .step-dot { width: 6px; height: 6px; background: rgba(0,0,0,0.2); border-radius: 50%; transition: 0.3s; }
+        .step-dot.active { background: var(--secondary); transform: scale(1.5); }
+
+        /* MUSIC BTN */
+        #music-controller { position: fixed; top: 20px; right: 25px; z-index: 1000; }
+        .music-btn-top {
+            background: white; padding: 8px 18px; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer;
+            display: flex; align-items: center; gap: 8px; color: var(--secondary);
+            font-weight: bold; border: 2px solid transparent; transition: 0.3s;
+        }
+        .music-btn-top.playing i { animation: spin 2s linear infinite; }
+
+        /* --- FEATURE STYLES --- */
+        
+        /* Intro */
+        .music-disc-large { width: 130px; height: 130px; background: #222; border-radius: 50%; border: 5px solid white; display: flex; justify-content: center; align-items: center; box-shadow: 0 15px 40px rgba(0,0,0,0.3); margin-bottom: 20px; }
+        .music-disc-large.playing { animation: spin 4s linear infinite; }
+        .music-disc-inner { width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Lock */
+        .pin-display { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; }
+        .pin-dot { width: 15px; height: 15px; background: #ddd; border-radius: 50%; transition: 0.2s; }
+        .pin-dot.filled { background: var(--secondary); transform: scale(1.3); }
+        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 10px; }
+        .num-btn { width: 65px; height: 65px; border-radius: 50%; border: none; background: white; font-size: 1.5rem; font-weight: bold; box-shadow: 0 5px 10px rgba(0,0,0,0.05); cursor: pointer; }
+        .num-btn:active { background: #eee; }
+
+        /* Quiz */
+        .quiz-option { background: white; padding: 15px; border-radius: 18px; margin-bottom: 12px; cursor: pointer; text-align: left; font-size: 1.1rem; border: 2px solid transparent; width: 100%; transition: 0.2s; }
+        .quiz-option:hover { border-color: var(--secondary); color: var(--secondary); }
+        .quiz-option.correct { background: #06d6a0; color: white; }
+        .quiz-option.wrong { background: #ef476f; color: white; }
+
+        /* Hug */
+        .hug-emoji { font-size: 6rem; cursor: pointer; animation: heartBeat 1.5s infinite; transition: 0.3s; }
+        .hug-emoji:active { transform: scale(0.8); }
+        .hug-timer { font-size: 4rem; font-weight: 800; color: var(--accent); display: none; }
+        .hug-progress-bg { width: 100%; height: 12px; background: #ffe5ec; border-radius: 20px; overflow: hidden; margin-top: 15px; display: none; }
+        .hug-progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--accent)); width: 0%; transition: width 0.1s linear; }
+
+        /* Scratch */
+        #scratch-wrapper { width: 280px; height: 280px; margin: 20px auto; border-radius: 25px; overflow: hidden; border: 5px solid white; position: relative; }
+        #secret-img { width: 100%; height: 100%; object-fit: cover; }
+        #scratch-canvas { position: absolute; top: 0; left: 0; cursor: crosshair; }
+
+        /* Cake */
+        .cake-stage { height: 220px; display: flex; justify-content: center; align-items: center; position: relative; }
+        .base-cake { font-size: 9rem; color: #ffdec1; transition: color 0.3s; animation: float 3s infinite; }
+        .topping { position: absolute; font-size: 2.2rem; animation: dropIn 0.5s; cursor: grab; }
+        .tool-bar { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+        .tool-btn { width: 55px; height: 55px; border-radius: 50%; border: none; font-size: 1.6rem; background: white; cursor: pointer; transition: 0.2s; }
+
+        /* Letter */
+        .letter-paper { background: #fffcf5; background-image: linear-gradient(#e0e0e0 1px, transparent 1px); background-size: 100% 35px; line-height: 35px; padding: 30px; border-radius: 12px; text-align: left; min-height: 220px; font-size: 1.15rem; color: #444; }
+        
+        /* Camera */
+        .camera-body { width: 280px; height: 200px; background: #f0f0f0; border-radius: 35px; position: relative; border: 5px solid white; display: flex; justify-content: center; align-items: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .camera-lens { width: 130px; height: 130px; background: #333; border-radius: 50%; border: 10px solid #e0e0e0; cursor: pointer; position: relative; z-index: 10; }
+        .photo-print { position: absolute; width: 180px; height: 220px; background: white; padding: 12px 12px 45px 12px; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); opacity: 0; z-index: 1; transition: all 1.5s; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .photo-print.printing { top: 110%; transform: translate(-50%, 40px) rotate(-10deg) scale(1); opacity: 1; z-index: 20; }
+        .flash-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:white; opacity:0; pointer-events:none; z-index:2000; }
+        .flash-active { animation: flash 0.5s ease-out; }
+
+        /* Memories */
+        .polaroid-wrapper { background: white; padding: 15px 15px 60px 15px; transform: rotate(-3deg); margin: 20px auto; width: 85%; max-width: 320px; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .polaroid-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #eee; }
+
+        /* Deep Talk (Cards) */
+        .deeptalk-wrapper {
+            width: 100%; height: 250px; position: relative; perspective: 1000px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .talk-card-single {
+            width: 90%; max-width: 400px; padding: 30px; background: white;
+            border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: absolute; text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 2px solid #ffe5ec;
+        }
+        .talk-number {
+            font-size: 3rem; color: #ffccd5; font-family: 'Great Vibes'; margin-bottom: 10px;
+        }
+        .talk-text {
+            font-size: 1.3rem; color: var(--dark-text); font-family: 'Sarabun'; line-height: 1.5;
+        }
+        
+        /* Promise (Stamp Effect) */
+        .promise-list { width: 100%; text-align: left; margin: 20px 0; }
+        .promise-item { 
+            display: flex; align-items: center; margin-bottom: 15px; font-size: 1.2rem; cursor: pointer; color: #555; 
+            padding: 15px; background: white; border-radius: 15px; position: relative; overflow: hidden;
+            transition: transform 0.2s; border: 2px solid transparent;
+        }
+        .promise-item:active { transform: scale(0.98); }
+        .stamp-mark {
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%) scale(2);
+            opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 2rem; color: var(--secondary); transform-origin: center;
+        }
+        .promise-item.checked { border-color: var(--secondary); background: #fff0f3; }
+        .promise-item.checked .stamp-mark { opacity: 1; transform: translateY(-50%) scale(1) rotate(-15deg); }
+
+        /* Garden */
+        .garden-area { width: 100%; height: 220px; background: #e0f2f1; border-radius: 20px; position: relative; overflow: hidden; margin: 20px 0; border-bottom: 10px solid #81c784; cursor: pointer; }
+        .flower { position: absolute; font-size: 2.5rem; bottom: 0; animation: grow 0.8s; }
+
+        /* Wishes */
+        .jar-container { position: relative; height: 250px; display: flex; justify-content: center; align-items: flex-end; }
+        .jar { font-size: 8rem; cursor: pointer; transition: 0.3s; z-index: 2; }
+        .jar:hover { transform: rotate(5deg); }
+        .star-wish { position: absolute; font-size: 2rem; color: #ffd166; z-index: 1; animation: floatUp 2s forwards; }
+
+        /* Diary */
+        .diary-book { width: 280px; height: 200px; perspective: 1000px; margin: 20px auto; position: relative; cursor: pointer; }
+        .diary-page { width: 50%; height: 100%; position: absolute; top: 0; background: #fffcf5; border: 1px solid #ddd; padding: 15px; transition: transform 1s; transform-origin: left center; display: flex; justify-content: center; align-items: center; backface-visibility: hidden; }
+        .diary-cover { background: var(--secondary); color: white; border-radius: 5px 0 0 5px; left: 0; z-index: 2; }
+        .diary-inner { left: 50%; z-index: 1; border-radius: 0 5px 5px 0; transform: rotateY(0deg); }
+        .diary-book.open .diary-cover { transform: rotateY(-180deg); }
+
+        /* Stay */
+        .couple-emoji { font-size: 7rem; animation: heartBeat 2s infinite; margin-bottom: 20px; }
+
+        /* Timer */
+        .timer-grid { display: flex; gap: 12px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+        .timer-box { background: white; padding: 15px; border-radius: 15px; min-width: 70px; border-bottom: 4px solid var(--secondary); }
+        .timer-val { font-size: 2rem; font-weight: 800; color: var(--secondary); display: block; }
+
+        /* Finale (Cartoon & Writing) */
+        #screen-finale { background: radial-gradient(circle, #fff0f3 0%, #ffc2d1 100%); }
+        .finale-content {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; height: 100%; position: relative; overflow: hidden;
+        }
+        
+        .writing-svg { 
+            width: 90%; max-width: 800px; height: auto; overflow: visible; 
+            margin-bottom: 20px; z-index: 2;
+        }
+        .brush-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            fill: transparent;
+            stroke: #d62828;
+            stroke-width: 3px;
+            stroke-dasharray: 2500;
+            stroke-dashoffset: 2500;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 3px 0 rgba(255,255,255,0.5));
+        }
+        .animate-write { animation: writeText ease-out forwards; }
+        .animate-fill { animation: fillText 1.5s ease forwards; }
+
+        /* Cartoon Animation */
+        .cartoon-scene {
+            position: absolute; bottom: 10%; width: 100%;
+            display: flex; justify-content: center; align-items: flex-end;
+            opacity: 0; pointer-events: none; z-index: 5;
+        }
+        .toon-char { font-size: 6rem; transition: all 1s ease-in-out; position: relative; }
+        .boy { transform: translateX(-100vw); }
+        .girl { transform: translateX(100vw); }
+        .kiss-heart { position: absolute; font-size: 4rem; top: -50px; left: 50%; transform: translateX(-50%) scale(0); opacity: 0; }
+        
+        .cartoon-scene.act .boy { transform: translateX(20px) rotate(10deg); }
+        .cartoon-scene.act .girl { transform: translateX(-20px) rotate(-10deg); }
+        .cartoon-scene.act .kiss-heart { animation: popHeart 1s 1s forwards; }
+        .cartoon-scene.act { opacity: 1; }
+
+        .bouquet-wrapper {
+            position: absolute; top: 60%; left: 50%;
+            transform: translate(-50%, 100%) scale(0.5); 
             text-align: center;
-            font-family: 'Arial', sans-serif;
-            margin-top: 100px;
+            opacity: 0;
+            z-index: 10;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        h1 {
-            color: #d63384;
-            font-size: 50px;
+        .bouquet-img { font-size: 10rem; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3)); display: block; }
+        .bouquet-msg {
+            font-size: 1.5rem; color: #590d22; font-weight: bold;
+            background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px;
+            margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: inline-block;
         }
-        p {
-            font-size: 20px;
-            color: #333;
+        .show-bouquet { 
+            transform: translate(-50%, -50%) scale(1); 
+            opacity: 1; 
         }
-        .heart {
-            font-size: 100px;
-            color: red;
-            animation: beat 1s infinite;
-        }
-        @keyframes beat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+        
+        .floating-balloon { position: absolute; bottom: -100px; font-size: 3rem; animation: floatUpBalloon 10s linear infinite; }
+
+        /* Animations */
+        .click-effect { position: absolute; font-size: 2rem; pointer-events: none; animation: floatUp 1s forwards; z-index: 9999; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes heartBeat { 0% { transform: scale(1); } 14% { transform: scale(1.15); } 28% { transform: scale(1); } 42% { transform: scale(1.15); } 70% { transform: scale(1); } }
+        @keyframes flash { 0% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes writeText { to { stroke-dashoffset: 0; } }
+        @keyframes fillText { to { fill: #d62828; stroke: transparent; } }
+        @keyframes floatUp { 0% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(-80px); } }
+        @keyframes grow { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        @keyframes dropIn { from { transform: translateY(-50px) scale(0); } to { transform: translateY(0) scale(1); } }
+        @keyframes popHeart { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 80% { transform: translateX(-50%) scale(1.5); opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
+        @keyframes floatUpBalloon { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(360deg); } }
+
     </style>
 </head>
 <body>
 
-    <h1>Happy Valentine's Day! 💖</h1>
-    <div class="heart">❤️</div>
-    <p>เว็บนี้สำหรับเธอ...</p>
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Music & Steps -->
+    <div class="step-dots" id="step-indicator">
+        <!-- 17 Dots -->
+        <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+        <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+        <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+        <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+        <div class="step-dot"></div>
+    </div>
 
+    <div id="music-controller">
+        <div class="music-btn-top" onclick="toggleAudio()">
+            <i class="fas fa-compact-disc"></i> <span id="music-status">เล่นเพลง</span>
+        </div>
+    </div>
+    
+    <audio id="bg-music" loop>
+        <source src="https://docs.google.com/uc?export=download&id=1jf_Xtbqpb-_UlFDmHDwf1H2xQIBIAuu8" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="app-container">
+
+        <!-- 1. INTRO -->
+        <div id="screen-intro" class="screen active">
+            <div class="card">
+                <div class="music-disc-large" id="intro-disc">
+                    <div class="music-disc-inner"><i class="fas fa-music" style="color:white; font-size: 2rem;"></i></div>
+                </div>
+                <h2 style="color: var(--secondary); margin-bottom: 10px;">The Ultimate Love Journey 🌹</h2>
+                <p style="margin-bottom: 30px;">17 บทพิสูจน์ความรักของเรา... พร้อมไหม?</p>
+                <div style="width: 100%; max-width: 300px;">
+                    <button class="btn-primary" style="width:100%; justify-content:center; margin-bottom:15px;" onclick="playMusicFromIntro()">
+                        <i class="fas fa-play"></i> เปิดเพลงก่อนนะ
+                    </button>
+                    <button class="btn-outline" style="width:100%; justify-content:center;" onclick="navigate('screen-intro', 'screen-lock', 1)">
+                        ไปต่อเลย ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LOCK -->
+        <div id="screen-lock" class="screen">
+            <div class="card">
+                <i class="fas fa-lock lock-icon" style="font-size:3rem; margin-bottom:15px;"></i>
+                <h2>ใส่รหัสหน่อยนะ</h2>
+                <p>Hint: วันเกิดนู่ยิ้ม (8 หลัก)</p>
+                <div class="pin-display" id="pin-dots">
+                    <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+                    <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+                </div>
+                <div class="numpad">
+                    <button class="num-btn" onclick="typePin(1)">1</button><button class="num-btn" onclick="typePin(2)">2</button><button class="num-btn" onclick="typePin(3)">3</button>
+                    <button class="num-btn" onclick="typePin(4)">4</button><button class="num-btn" onclick="typePin(5)">5</button><button class="num-btn" onclick="typePin(6)">6</button>
+                    <button class="num-btn" onclick="typePin(7)">7</button><button class="num-btn" onclick="typePin(8)">8</button><button class="num-btn" onclick="typePin(9)">9</button>
+                    <button class="num-btn" style="opacity:0; pointer-events:none;"></button><button class="num-btn" onclick="typePin(0)">0</button><button class="num-btn" onclick="deletePin()"><i class="fas fa-backspace"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. QUIZ -->
+        <div id="screen-quiz" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-quiz', 'screen-lock', 1)"><i class="fas fa-chevron-left"></i></button>
+                <h2>Mission 1: แฟนพันธุ์แท้</h2>
+                <h3 id="quiz-q" style="color: var(--accent); margin: 30px 0;">คำถาม...</h3>
+                <div id="quiz-opts" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- 4. HUG -->
+        <div id="screen-hug" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-hug', 'screen-quiz', 2)"><i class="fas fa-arrow-left"></i></button>
+                <h2>Mission 2: ภารกิจกอด ❤️</h2>
+                <p id="hug-instruction">กดปุ่มแล้วกอดกัน 10 วินาทีนะ!</p>
+                <div class="hug-anim-container">
+                    <div id="hug-btn" class="hug-emoji" onclick="startHugMission()">🫂</div>
+                    <div id="hug-timer" class="hug-timer">10</div>
+                </div>
+                <div id="hug-progress" class="hug-progress-bg"><div id="hug-fill" class="hug-progress-fill"></div></div>
+                <h3 id="hug-msg" style="color:var(--accent); font-size:1.8rem; opacity:0; margin-top:20px;"></h3>
+                <button id="btn-hug-next" class="btn-primary" style="display: none;" onclick="navigate('screen-hug', 'screen-scratch', 4)">
+                    ไปด่านต่อไป <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. SCRATCH -->
+        <div id="screen-scratch" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-scratch', 'screen-hug', 3)"><i class="fas fa-arrow-left"></i></button>
+                <h2>Mission 3: ความลับ 🤫</h2>
+                <p>ใช้นิ้วหรือเมาส์ขูดหน้าจอเพื่อดูรูปนะ</p>
+                <div id="scratch-wrapper">
+                    <img id="secret-img" src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80">
+                    <canvas id="scratch-canvas"></canvas>
+                </div>
+                <h3 id="reveal-msg" style="opacity:0; color:var(--accent); font-size:1.5rem; transition:0.5s; margin-top:10px;">น่ารักที่สุดเลย!</h3>
+                <button id="btn-scratch-next" class="btn-primary" style="display: none; margin-top: 15px;" onclick="navigate('screen-scratch', 'screen-cake', 5)">
+                    ไปด่านต่อไป <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 6. CAKE -->
+        <div id="screen-cake" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-cake', 'screen-scratch', 4)"><i class="fas fa-arrow-left"></i></button>
+                <h2>Mission 4: แต่งเติมเค้ก 🎂</h2>
+                <div class="cake-stage" id="cake-area"><i class="fas fa-birthday-cake base-cake" id="base-cake"></i></div>
+                <div class="tool-bar">
+                    <button class="tool-btn" onclick="document.getElementById('base-cake').style.color='#f4a261'" style="background:#f4a261"></button>
+                    <button class="tool-btn" onclick="document.getElementById('base-cake').style.color='#ffccd5'" style="background:#ffccd5"></button>
+                    <button class="tool-btn" onclick="addTop('🍓')">🍓</button>
+                    <button class="tool-btn" onclick="addTop('🍫')">🍫</button>
+                    <button class="tool-btn" onclick="addTop('🕯️')">🕯️</button>
+                    <button class="tool-btn" onclick="document.getElementById('cake-area').innerHTML='<i class=\'fas fa-birthday-cake base-cake\' id=\'base-cake\'></i>'"><i class="fas fa-trash"></i></button>
+                </div>
+                <button class="btn-primary" style="margin-top:30px;" onclick="navigate('screen-cake', 'screen-letter', 6)">
+                    แต่งเสร็จแล้ว <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 7. LETTER -->
+        <div id="screen-letter" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-letter', 'screen-cake', 5)"><i class="fas fa-arrow-left"></i></button>
+                <h2>ถึง... เธอคนดี</h2>
+                <div class="letter-paper">
+                    <span id="typewriter-text"></span><span class="cursor"></span>
+                </div>
+                <p style="margin-top:20px; font-weight:bold; color:var(--accent);">จาก...เค้าเอง ❤️</p>
+                <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 7)">
+                    ไปถ่ายรูปกัน 📸
+                </button>
+            </div>
+        </div>
+
+        <!-- 8. CAMERA -->
+        <div id="screen-camera" class="screen">
+            <div class="flash-overlay" id="camera-flash"></div>
+            <div class="card" style="background:transparent; border:none; box-shadow:none;">
+                <button class="btn-back" onclick="navigate('screen-camera', 'screen-letter', 6)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
+                <h2 style="color:var(--dark-text); font-size: 3rem; text-shadow: 0 0 10px white;">ถ่ายรูปคู่กันหน่อย 📸</h2>
+                <div class="camera-body" style="margin: 0 auto;">
+                    <div class="camera-lens" onclick="takePhoto()"></div>
+                    <div class="photo-print" id="printed-photo">
+                        <div class="photo-inner"><i class="fas fa-heart" style="font-size:4rem; color:#ff4d6d;"></i></div>
+                    </div>
+                </div>
+                <p style="color:var(--dark-text); margin-top:40px; font-weight:bold; font-size:1.2rem; text-shadow: 0 0 5px white;">กดที่เลนส์เพื่อถ่ายรูป</p>
+            </div>
+        </div>
+
+        <!-- 9. MEMORIES -->
+        <div id="screen-memories" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-memories', 'screen-camera', 7)"><i class="fas fa-arrow-left"></i></button>
+                <h2 style="font-family:'Pacifico'; color: var(--accent);">Our Memories</h2>
+                <div class="polaroid-wrapper">
+                    <img id="gallery-img" src="" class="polaroid-img">
+                    <div id="gallery-caption" style="margin-top:15px; font-size:1.2rem;"></div>
+                </div>
+                <div class="gallery-nav">
+                    <button class="nav-btn" onclick="changeSlide(-1)"><i class="fas fa-arrow-left"></i></button>
+                    <button class="nav-btn" onclick="changeSlide(1)"><i class="fas fa-arrow-right"></i></button>
+                </div>
+                <button class="btn-primary" style="margin-top:30px;" onclick="navigate('screen-memories', 'screen-deeptalk', 9)">
+                    ไปต่อเลย <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 10. DEEP TALK (Improved: Card Swap) -->
+        <div id="screen-deeptalk" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-deeptalk', 'screen-memories', 8)"><i class="fas fa-arrow-left"></i></button>
+                <h2>Deep Talk ❤️</h2>
+                <div class="deeptalk-wrapper">
+                    <div class="talk-card-single" id="talk-card">
+                        <div class="talk-number" id="talk-num">Q1</div>
+                        <div class="talk-text" id="talk-text">...</div>
+                    </div>
+                </div>
+                <button class="btn-outline" id="btn-next-talk" onclick="nextDeepTalk()">ข้อถัดไป <i class="fas fa-arrow-right"></i></button>
+                <button class="btn-primary" id="btn-finish-talk" style="display:none;" onclick="navigate('screen-deeptalk', 'screen-promise', 10)">ไปสัญญาใจกัน ➜</button>
+            </div>
+        </div>
+
+        <!-- 11. PROMISE (Stamp Effect) -->
+        <div id="screen-promise" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-promise', 'screen-deeptalk', 9)"><i class="fas fa-arrow-left"></i></button>
+                <h2>สัญญาใจ 🤙</h2>
+                <p>กดเพื่อประทับตราสัญญา</p>
+                <div class="promise-list">
+                    <div class="promise-item" onclick="togglePromise(this)">
+                        <span>จะรักเธอคนเดียว</span>
+                        <div class="stamp-mark"><i class="fas fa-heart"></i></div>
+                    </div>
+                    <div class="promise-item" onclick="togglePromise(this)">
+                        <span>จะพาไปกินของอร่อย</span>
+                        <div class="stamp-mark"><i class="fas fa-utensils"></i></div>
+                    </div>
+                    <div class="promise-item" onclick="togglePromise(this)">
+                        <span>จะไม่ดื้อ (มั้ง)</span>
+                        <div class="stamp-mark"><i class="fas fa-smile-wink"></i></div>
+                    </div>
+                </div>
+                <button id="btn-promise-next" class="btn-primary" style="opacity:0.5; pointer-events:none;" onclick="navigate('screen-promise', 'screen-garden', 11)">สัญญาแล้วนะ ➜</button>
+            </div>
+        </div>
+
+        <!-- 12. GARDEN -->
+        <div id="screen-garden" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-garden', 'screen-promise', 10)"><i class="fas fa-arrow-left"></i></button>
+                <h2>ปลูกรัก 🌻</h2>
+                <div class="garden-area" id="garden-area" onclick="plantFlower(event)"><div class="sun">☀️</div></div>
+                <button class="btn-primary" onclick="navigate('screen-garden', 'screen-wishes', 12)">สวยจัง ➜</button>
+            </div>
+        </div>
+
+        <!-- 13. WISHES -->
+        <div id="screen-wishes" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-wishes', 'screen-garden', 11)"><i class="fas fa-arrow-left"></i></button>
+                <h2>โหลเก็บดาว ⭐</h2>
+                <div class="jar-container"><div class="jar" onclick="popStar()">🏺</div></div>
+                <h3 id="wish-text" style="height:30px; color:var(--accent);"></h3>
+                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-wishes', 'screen-diary', 13)">ไปต่อ ➜</button>
+            </div>
+        </div>
+
+        <!-- 14. DIARY -->
+        <div id="screen-diary" class="screen">
+            <div class="card" style="background:transparent; box-shadow:none; border:none;">
+                <button class="btn-back" onclick="navigate('screen-diary', 'screen-wishes', 12)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
+                <div class="diary-book" onclick="this.classList.toggle('open')">
+                    <div class="diary-cover" style="width:50%; height:100%; position:absolute; top:0; left:0; background:var(--secondary); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; border-radius:5px 0 0 5px; z-index:2; transition:transform 1s; transform-origin:left center;">
+                        <h2>Our Diary 📔</h2><p>Click to Open</p>
+                    </div>
+                    <div class="diary-page" style="width:50%; height:100%; position:absolute; top:0; left:50%; background:#fffcf5; border:1px solid #ddd; padding:20px; display:flex; justify-content:center; align-items:center; z-index:1; border-radius:0 5px 5px 0;">
+                        <p>วันนี้เป็นวันที่ดีที่สุดเลย<br>ขอบคุณที่มีเธอเข้ามา<br>รักนะครับ ❤️</p>
+                    </div>
+                </div>
+                <button class="btn-primary" style="margin-top:40px;" onclick="navigate('screen-diary', 'screen-stay', 14)">ไปต่อ ➜</button>
+            </div>
+        </div>
+
+        <!-- 15. STAY -->
+        <div id="screen-stay" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 13)"><i class="fas fa-arrow-left"></i></button>
+                <div class="couple-emoji">👩‍❤️‍👨</div>
+                <h2 style="font-size:2.5rem; color:var(--accent);">อยู่ด้วยกันนานๆ นะ</h2>
+                <p>รักที่สุดเลยยยย ❤️</p>
+                <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 15)">ดูเวลาของเรา ⏳</button>
+            </div>
+        </div>
+
+        <!-- 16. TIMER -->
+        <div id="screen-timer" class="screen">
+            <div class="card">
+                <button class="btn-back" onclick="navigate('screen-timer', 'screen-stay', 14)"><i class="fas fa-arrow-left"></i></button>
+                <i class="fas fa-hourglass-start" style="font-size: 4rem; color: var(--secondary); margin-bottom: 20px; animation: float 3s infinite;"></i>
+                <h2>เวลาของเรา</h2>
+                <div class="timer-grid">
+                    <div class="timer-box"><span class="timer-val" id="t-days">0</span><span>วัน</span></div>
+                    <div class="timer-box"><span class="timer-val" id="t-hours">0</span><span>ชม.</span></div>
+                    <div class="timer-box"><span class="timer-val" id="t-mins">0</span><span>นาที</span></div>
+                    <div class="timer-box"><span class="timer-val" id="t-secs">0</span><span>วิ</span></div>
+                </div>
+                <p id="start-date-label">นับตั้งแต่...</p>
+                <button class="btn-primary" onclick="navigate('screen-timer', 'screen-finale', 16)">ฉลอง! 🎉</button>
+            </div>
+        </div>
+
+        <!-- 17. FINALE -->
+        <div id="screen-finale" class="screen">
+            <div class="finale-content">
+                <!-- SVG Handwriting -->
+                <svg class="writing-svg" viewBox="0 0 1000 300">
+                    <text x="50" y="150" class="brush-text" id="ft-1">Happy</text>
+                    <text x="350" y="150" class="brush-text" id="ft-2">Valentine's</text>
+                    <text x="800" y="150" class="brush-text" id="ft-3">Day</text>
+                </svg>
+                
+                <!-- Cartoon Scene -->
+                <div class="cartoon-scene" id="cartoon-scene">
+                    <div class="toon-char boy">👦</div>
+                    <div class="kiss-heart">💖</div>
+                    <div class="toon-char girl">👧</div>
+                </div>
+
+                <!-- Bouquet Popup -->
+                <div id="bouquet-container" class="bouquet-wrapper">
+                    <span class="bouquet-img">💐</span>
+                    <div class="bouquet-msg">สำหรับเธอคนเดียว ❤️</div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="prevStep('screen-finale', 'screen-timer', 15)" style="top:30px; left:30px; color: #d62828;"><i class="fas fa-arrow-left"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+        /* CONFIGURATION */
+        const CONFIG = {
+            passcode: "13092549",
+            startDate: "2026-02-06T00:00:00",
+            quiz: [
+                { q: "เราเจอกันครั้งแรกที่ไหน?", opts: ["โรงเรียน", "ห้าง", "ทะเล", "ร้านกาแฟ"], a: 3 },
+                { q: "ของกินที่เค้าชอบที่สุด?", opts: ["ชาบู", "หมูกระทะ", "ซูชิ", "ส้มตำ"], a: 1 },
+                { q: "เดทแรกเราไปทำอะไรกัน?", opts: ["ดูหนัง", "กินข้าว", "เดินสวน", "ขับรถเล่น"], a: 0 }
+            ],
+            gallery: [
+                { src: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?w=600", caption: "รูปคู่ใบแรกของเรา 📸" },
+                { src: "https://images.unsplash.com/photo-1516589178581-a7726952b195?w=600", caption: "ทริปทะเลแสนสุข 🌊" },
+                { src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️" },
+                { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600", caption: "รักเธอที่สุดเลย 🌹" }
+            ],
+            // Deep Talk Questions
+            deepTalk: [
+                "อะไรคือคุณสมบัติที่สำคัญที่สุดที่เราสองคนมองหาในความสัมพันธ์?",
+                "เราสองคน เชื่อว่าการให้อภัยในความสัมพันธ์เป็นเรื่องสำคัญแค่ไหน?",
+                "อะไรคือสิ่งที่ทำให้เราสองคนรู้สึกปลอดภัยในความสัมพันธ์?",
+                "เวลาเราสองคนเหนื่อยไม่ไหวเราสองคนจะช่วยเหลือซึ่งกันและกันอย่างไร?",
+                "ในสายตาอีกฝ่ายเป็นคนแบบไหน?"
+            ],
+            letter: "สุขสันต์วันวาเลนไทน์นะครับคนดี ขอบคุณที่เข้ามาเป็นความสดใสในโลกของเค้านะ..."
+        };
+
+        let state = { pin: "", quizIndex: 0, promiseCount: 0, talkIndex: 0 };
+        const audio = document.getElementById('bg-music');
+
+        // Global Effects
+        document.addEventListener('click', (e) => {
+            const h = document.createElement('div'); h.className='click-effect'; h.innerHTML='❤️';
+            h.style.left=`${e.clientX}px`; h.style.top=`${e.clientY}px`;
+            document.body.appendChild(h); setTimeout(()=>h.remove(), 800);
+        });
+
+        // Background
+        const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d');
+        canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+        let particles=[]; for(let i=0; i<30; i++) particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,speed:0.5+Math.random(),size:10+Math.random()*20,text:Math.random()>0.5?'❤️':'✨'});
+        function animateBg(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.y-=p.speed;if(p.y<-50)p.y=canvas.height+50;ctx.font=p.size+'px serif';ctx.fillText(p.text,p.x,p.y)}); requestAnimationFrame(animateBg); }
+        animateBg();
+
+        // Audio
+        function toggleAudio(){ 
+            const btn=document.getElementById('music-status'); const icon=document.querySelector('.music-btn-top i');
+            if(audio.paused){ audio.play().catch(()=>{}); btn.innerText="หยุดเพลง"; icon.className="fas fa-pause"; }
+            else{ audio.pause(); btn.innerText="เล่นเพลง"; icon.className="fas fa-compact-disc"; }
+        }
+        function playMusicFromIntro(){ toggleAudio(); }
+
+        // Navigation
+        function navigate(fromId, toId, stepIndex) {
+            document.getElementById(fromId).classList.add('exit');
+            document.getElementById(fromId).classList.remove('active');
+            if(typeof stepIndex!=='undefined'){
+                document.getElementById('step-indicator').style.opacity='1';
+                document.querySelectorAll('.step-dot').forEach((d,i)=>d.classList.toggle('active',i<=stepIndex));
+            }
+            setTimeout(()=>{
+                document.getElementById(fromId).classList.remove('exit');
+                document.getElementById(toId).classList.add('active');
+                if(toId==='screen-quiz') loadQuiz();
+                if(toId==='screen-scratch') setTimeout(initScratch,500);
+                if(toId==='screen-letter') typeWriter();
+                if(toId==='screen-timer') startTimer();
+                if(toId==='screen-memories') updateGalleryUI();
+                if(toId==='screen-deeptalk') updateDeepTalkUI();
+                if(toId==='screen-finale') playFinale();
+            },800);
+        }
+        function prevStep(c,p,s){
+            document.getElementById(c).classList.remove('active');
+            document.getElementById(p).classList.remove('exit');
+            document.getElementById(p).classList.add('active');
+            document.querySelectorAll('.step-dot').forEach((d,i)=>d.classList.toggle('active',i<=s));
+        }
+
+        // Logic
+        function typePin(n){ if(state.pin.length<8){ state.pin+=n; updatePinDots(); if(state.pin.length===8) checkPin(); } }
+        function deletePin(){ state.pin=state.pin.slice(0,-1); updatePinDots(); }
+        function updatePinDots(){ document.querySelectorAll('.pin-dot').forEach((d,i)=>{ d.classList.toggle('filled',i<state.pin.length); d.classList.remove('error'); }); }
+        function checkPin(){ if(state.pin===CONFIG.passcode) setTimeout(()=>navigate('screen-lock','screen-quiz',2),300); else{ document.querySelectorAll('.pin-dot').forEach(d=>d.classList.add('error')); setTimeout(()=>{state.pin="";updatePinDots();},500); } }
+
+        function loadQuiz(){ 
+            if(state.quizIndex>=CONFIG.quiz.length){ document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',3)">ไปด่านต่อไป ➜</button>`; fireConfetti(); return; }
+            const q=CONFIG.quiz[state.quizIndex]; document.getElementById('quiz-q').innerText=q.q;
+            const area=document.getElementById('quiz-opts'); area.innerHTML="";
+            q.opts.forEach((opt,i)=>{ 
+                const btn=document.createElement('div'); btn.className='quiz-option'; btn.innerText=opt; 
+                btn.onclick=()=>{ if(i===q.a){ btn.classList.add('correct'); setTimeout(()=>{state.quizIndex++;loadQuiz();},800); } else btn.classList.add('wrong'); }; 
+                area.appendChild(btn); 
+            });
+        }
+
+        function startHugMission(){
+            document.getElementById('hug-btn').style.display='none';
+            document.getElementById('hug-timer').style.display='block';
+            document.getElementById('hug-progress').style.display='block';
+            let t=10; const timer=setInterval(()=>{
+                t--; document.getElementById('hug-timer').innerText=t;
+                document.getElementById('hug-fill').style.width=((10-t)*10)+'%';
+                if(t<=0){ clearInterval(timer); document.getElementById('hug-timer').style.display='none'; document.getElementById('hug-msg').style.opacity=1; document.getElementById('hug-msg').innerText="เติมพลังเรียบร้อย! ❤️"; document.getElementById('btn-hug-next').style.display='inline-flex'; fireConfetti(); }
+            },1000);
+        }
+
+        function initScratch(){
+            const c=document.getElementById('scratch-canvas'); const ctx=c.getContext('2d');
+            const w=document.getElementById('scratch-wrapper'); c.width=w.offsetWidth; c.height=w.offsetHeight;
+            ctx.fillStyle="#ffb3c1"; ctx.fillRect(0,0,c.width,c.height);
+            ctx.fillStyle="#fff"; ctx.font="bold 30px Mali"; ctx.textAlign="center"; ctx.fillText("ขูดเลย!",c.width/2,c.height/2);
+            let isD=false;
+            const scratch=(x,y)=>{ 
+                ctx.globalCompositeOperation='destination-out'; ctx.beginPath(); ctx.arc(x,y,40,0,Math.PI*2); ctx.fill(); 
+                const d=ctx.getImageData(0,0,c.width,c.height).data; let cnt=0; 
+                for(let i=3;i<d.length;i+=256) if(d[i]===0) cnt++;
+                if(cnt>(d.length/256)*0.4){ c.style.transition="opacity 1s"; c.style.opacity=0; document.getElementById('reveal-msg').style.opacity=1; document.getElementById('btn-scratch-next').style.display='inline-flex'; setTimeout(()=>c.remove(),1000); }
+            };
+            c.onmousedown=()=>isD=true; window.onmouseup=()=>isD=false; c.onmousemove=(e)=>{if(isD){const r=c.getBoundingClientRect();scratch(e.clientX-r.left,e.clientY-r.top);}};
+            c.ontouchstart=()=>isD=true; window.ontouchend=()=>isD=false; c.ontouchmove=(e)=>{if(isD){const r=c.getBoundingClientRect();scratch(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top);}};
+        }
+
+        function addTop(e){ const el=document.createElement('div'); el.className='topping'; el.innerText=e; el.style.left=(Math.random()*70+15)+'%'; el.style.top=(Math.random()*50+20)+'%'; document.getElementById('cake-area').appendChild(el); }
+        function typeWriter(){ const el=document.getElementById('typewriter-text'); el.innerHTML=""; let i=0; function type(){ if(i<CONFIG.letter.length){ el.innerHTML+=CONFIG.letter.charAt(i); i++; setTimeout(type,30); } } type(); }
+        function takePhoto(){ document.getElementById('camera-flash').classList.add('flash-active'); setTimeout(()=>{ document.getElementById('camera-flash').classList.remove('flash-active'); document.getElementById('printed-photo').classList.add('printing'); setTimeout(()=>navigate('screen-camera','screen-memories',8),2500); },300); }
+        
+        let galIdx=0;
+        function changeSlide(n){ galIdx=(galIdx+n+CONFIG.gallery.length)%CONFIG.gallery.length; updateGalleryUI(); }
+        function updateGalleryUI(){ const d=CONFIG.gallery[galIdx]; const img=document.getElementById('gallery-img'); img.style.opacity=0; setTimeout(()=>{ img.src=d.src; document.getElementById('gallery-caption').innerText=d.caption; img.style.opacity=1; },200); }
+
+        /* --- Deep Talk Logic --- */
+        function updateDeepTalkUI() {
+            const card = document.getElementById('talk-card');
+            const num = document.getElementById('talk-num');
+            const txt = document.getElementById('talk-text');
+            
+            // Animation Out
+            gsap.to(card, { x: -50, opacity: 0, duration: 0.3, onComplete: () => {
+                num.innerText = `Q${state.talkIndex + 1}`;
+                txt.innerText = CONFIG.deepTalk[state.talkIndex];
+                // Animation In
+                gsap.fromTo(card, { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 });
+            }});
+        }
+
+        function nextDeepTalk() {
+            if (state.talkIndex < CONFIG.deepTalk.length - 1) {
+                state.talkIndex++;
+                updateDeepTalkUI();
+            } else {
+                document.getElementById('btn-next-talk').style.display = 'none';
+                document.getElementById('btn-finish-talk').style.display = 'inline-flex';
+                fireConfetti();
+            }
+        }
+
+        function togglePromise(el){
+            el.classList.toggle('checked');
+            state.promiseCount=document.querySelectorAll('.promise-item.checked').length;
+            if(state.promiseCount===3){ const btn=document.getElementById('btn-promise-next'); btn.style.opacity=1; btn.style.pointerEvents='auto'; }
+        }
+
+        function plantFlower(e){ const f=document.createElement('div'); f.className='flower'; f.innerText=['🌻','🌷','🌹','🌸','🌺'][Math.floor(Math.random()*5)]; const r=document.getElementById('garden-area').getBoundingClientRect(); f.style.left=(e.clientX-r.left-20)+'px'; document.getElementById('garden-area').appendChild(f); }
+        function popStar(){ const msgs=["รักนะ","คิดถึง","คนเก่ง","จุ๊บๆ"]; document.getElementById('wish-text').innerText=msgs[Math.floor(Math.random()*msgs.length)]; fireConfetti(); }
+
+        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่ "+new Date(CONFIG.startDate).toLocaleDateString('th-TH'); }
+
+        // Finale
+        function playFinale() {
+            const t1 = document.getElementById('ft-1');
+            const t2 = document.getElementById('ft-2');
+            const t3 = document.getElementById('ft-3');
+            const bouquet = document.getElementById('bouquet-container');
+            const scene = document.getElementById('cartoon-scene');
+            
+            [t1,t2,t3,bouquet,scene].forEach(el => { 
+                el.classList.remove('animate-write', 'animate-fill', 'show-bouquet', 'act'); 
+                void el.offsetWidth; 
+            });
+
+            // 1. Text
+            t1.style.animationDuration = '2s'; t1.classList.add('animate-write');
+            setTimeout(() => t1.classList.add('animate-fill'), 2000);
+
+            setTimeout(() => { t2.style.animationDuration = '3s'; t2.classList.add('animate-write'); setTimeout(() => t2.classList.add('animate-fill'), 3000); }, 1800); 
+            setTimeout(() => { t3.style.animationDuration = '1.5s'; t3.classList.add('animate-write'); setTimeout(() => t3.classList.add('animate-fill'), 1500); }, 4500);
+            
+            // 2. Cartoon Enter
+            setTimeout(() => { scene.classList.add('act'); }, 6000);
+
+            // 3. Bouquet & Fireworks
+            setTimeout(() => {
+                bouquet.classList.add('show-bouquet');
+                confettiExplosion();
+                createBalloons();
+            }, 8000);
+        }
+
+        function createBalloons() {
+            for(let i=0; i<10; i++) {
+                const b = document.createElement('div');
+                b.className = 'floating-balloon';
+                b.innerText = ['🎈','💗','🧸','🌹'][Math.floor(Math.random()*4)];
+                b.style.left = Math.random()*90 + '%';
+                b.style.animationDelay = Math.random()*5 + 's';
+                document.getElementById('screen-finale').appendChild(b);
+            }
+        }
+
+        function confettiExplosion(){ var d=5*1000; var end=Date.now()+d; var int=setInterval(function(){ if(Date.now()>end) return clearInterval(int); confetti({particleCount:50,spread:60,origin:{y:0.7}}); },250); }
+        function fireConfetti(){ confetti({particleCount:100,spread:70,origin:{y:0.6}}); }
+
+    </script>
 </body>
 </html>
