@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Love Journey: V4 Ultimate Edition ❤️</title>
+    <title>Happy Valentine's Day to my love ❤️</title>
     
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,7 +122,7 @@
             .btn-primary, .btn-outline { font-size: 1.2rem !important; padding: 12px 35px !important; }
             .music-disc-large { width: 140px !important; height: 140px !important; }
             .scratch-area { width: 400px !important; height: 280px !important; }
-            .letter-paper { min-height: 280px !important; font-size: 1.3rem !important; line-height: 40px !important; }
+            .letter-paper { min-height: 280px !important; font-size: 1.05rem !important; line-height: 34px !important; }
             .cake-stage { height: 240px !important; } .base-cake { font-size: 10rem !important; }
             .camera-body { width: 380px !important; height: 260px !important; }
             .photo-print { width: 220px !important; height: 280px !important; }
@@ -215,8 +215,8 @@
         @keyframes shakeBox { 0% { transform: rotate(0deg); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } 100% { transform: rotate(0deg); } }
         
         /* SCRATCH */
-        #scratch-wrapper { width: 250px; height: 250px; margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid white; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        #secret-img { width: 100%; height: 100%; object-fit: cover; }
+        #scratch-wrapper { width: min(88vw, 340px); height: min(88vw, 340px); margin: 15px auto; border-radius: 20px; overflow: hidden; border: 4px solid white; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        #secret-img { width: 100%; height: 100%; border: 0; background: #fff; }
         #scratch-canvas { position: absolute; top: 0; left: 0; cursor: crosshair; }
 
         /* CAKE */
@@ -227,7 +227,7 @@
         .tool-btn { width: 45px; height: 45px; border-radius: 50%; border: none; font-size: 1.4rem; background: white; cursor: pointer; transition: 0.2s; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
 
         /* LETTER */
-        .letter-paper { background: #fffcf5; background-image: linear-gradient(#e0e0e0 1px, transparent 1px); background-size: 100% 30px; line-height: 30px; padding: 25px; border-radius: 10px; text-align: left; min-height: 200px; font-size: 1.05rem; color: #444; width: 100%; }
+        .letter-paper { background: #fffcf5; background-image: linear-gradient(#e0e0e0 1px, transparent 1px); background-size: 100% 30px; line-height: 28px; padding: 25px; border-radius: 10px; text-align: left; min-height: 200px; font-size: 0.95rem; color: #444; width: 100%; }
         
         /* REAL CAMERA (FIXED FOR REALISTIC SLIDING EFFECT) */
         .camera-wrapper {
@@ -250,38 +250,100 @@
         .camera-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
         .shutter-btn { width: 60px; height: 60px; background: white; border-radius: 50%; margin-top: 15px; border: 4px solid #aaa; cursor: pointer; transition: 0.2s; }
         .shutter-btn:active { transform: scale(0.9); background: #eee; }
+        .shutter-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
         
         .camera-slot {
             position: absolute; bottom: -8px; width: 80%; height: 12px; background: #222;
             z-index: 6; border-radius: 0 0 10px 10px; border: 2px solid #444;
         }
 
-        .photo-print { 
-            position: absolute; width: 200px; height: 240px; background: white; 
-            padding: 10px 10px 40px 10px; 
-            top: 20px; /* Start aligned near top, hidden behind camera */
-            left: 50%; transform: translate(-50%, 0) scale(0.8); 
-            opacity: 0; 
-            z-index: 10; /* Lower z-index than camera body (20) */
-            transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1); /* Slower transition */
-            display: flex; justify-content: center; align-items: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); pointer-events: none; 
+        .photo-print {
+            position: absolute;
+            width: 200px;
+            height: 240px;
+            background: white;
+            padding: 10px 10px 40px 10px;
+            top: 36px;
+            left: 50%;
+            transform: translate(-50%, 0) scale(0.86);
+            opacity: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            pointer-events: none;
+            border-radius: 2px;
+            overflow: hidden;
         }
-        
-        .photo-print img { width: 100%; height: 100%; object-fit: cover; background: #ddd; }
-        
-        .photo-print.printing { 
-            top: 90%; /* Slide down */
-            transform: translate(-50%, 0) rotate(-5deg) scale(1); 
-            opacity: 1; 
+
+        .photo-print img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #ddd;
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        .photo-print::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -45%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.75), transparent);
+            opacity: 0;
+            transform: skewX(-15deg);
+        }
+
+        .photo-print.printing {
+            animation: printOut 2.2s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+            opacity: 1;
+        }
+
+        .photo-print.printing::after {
+            animation: printShine 0.9s ease-out 1.1s forwards;
+        }
+
+        .print-status {
+            margin-top: 8px;
+            min-height: 24px;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-shadow: 0 0 8px rgba(255,255,255,0.7);
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.35s ease;
+        }
+
+        .print-status.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .camera-wrapper.printing-active .camera-body {
+            animation: cameraNudge 0.28s ease-in-out 3;
         }
 
         .flash-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:white; opacity:0; pointer-events:none; z-index:2000; }
         .flash-active { animation: flash 0.5s ease-out; }
 
         /* MEMORIES */
-        .polaroid-wrapper { background: white; padding: 12px 12px 50px 12px; transform: rotate(-2deg); margin: 15px auto; width: 90%; max-width: 280px; transition: 0.4s; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .polaroid-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #eee; }
+        .polaroid-wrapper {
+            --tilt: -2deg;
+            background: white; padding: 12px 12px 50px 12px; margin: 15px auto;
+            width: clamp(260px, 70vw, 390px); transition: 0.45s; box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: rotate(var(--tilt)); position: relative; overflow: visible;
+            animation: memoryFloat 4s ease-in-out infinite;
+        }
+        .polaroid-wrapper.slide-enter { animation: memoryPop 0.55s cubic-bezier(0.2, 0.9, 0.2, 1); }
+        .polaroid-media { width: 100%; aspect-ratio: 3/4; overflow: hidden; border-radius: 2px; position: relative; background: #eee; }
+        .polaroid-img { width: 100%; height: 100%; object-fit: cover; object-position: center; background: #eee; display: block; border: 0; margin: 0 auto; transition: transform 0.7s ease, opacity 0.35s ease; }
+        .polaroid-video { width: 100%; height: 100%; border: 0; display: none; background: #000; }
+        .polaroid-wrapper:hover .polaroid-img { transform: scale(1.04); }
+        .memory-spark { position: absolute; font-size: 1rem; opacity: 0; pointer-events: none; animation: memorySpark 1s ease forwards; z-index: 3; }
         .gallery-nav { display: flex; gap: 20px; justify-content: center; margin-top: 15px; }
         .nav-btn { background: white; border: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; font-size: 1rem; color: var(--secondary); }
 
@@ -309,11 +371,13 @@
         .star-wish { position: absolute; font-size: 1.5rem; color: #ffd166; z-index: 1; animation: floatUp 2s forwards; }
 
         /* DIARY */
-        .diary-book { width: 240px; height: 180px; perspective: 1000px; margin: 15px auto; position: relative; cursor: pointer; }
+        .diary-book { width: 240px; height: 180px; perspective: 1000px; margin: 15px auto; position: relative; cursor: pointer; animation: diaryPulse 3s ease-in-out infinite; }
         .diary-page { width: 50%; height: 100%; position: absolute; top: 0; background: #fffcf5; border: 1px solid #ddd; padding: 10px; transition: transform 1s; transform-origin: left center; display: flex; justify-content: center; align-items: center; backface-visibility: hidden; font-size: 0.9rem; text-align: center;}
         .diary-cover { background: var(--secondary); color: white; border-radius: 5px 0 0 5px; left: 0; z-index: 2; }
         .diary-inner { left: 50%; z-index: 1; border-radius: 0 5px 5px 0; transform: rotateY(0deg); }
         .diary-book.open .diary-cover { transform: rotateY(-180deg); }
+        .diary-book.open { animation: diaryOpenFloat 2.2s ease-in-out; }
+        .diary-heart { position: absolute; font-size: 1.3rem; opacity: 0; animation: diaryHeartUp 1.2s ease forwards; pointer-events: none; z-index: 5; }
 
         /* STAY */
         .couple-emoji { font-size: 5rem; animation: heartBeat 2s infinite; margin-bottom: 15px; }
@@ -357,6 +421,27 @@
         @keyframes dropIn { from { transform: translateY(-50px) scale(0); } to { transform: translateY(0) scale(1); } }
         @keyframes popHeart { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 80% { transform: translateX(-50%) scale(1.5); opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 1; } }
         @keyframes floatUpBalloon { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(360deg); } }
+        @keyframes memoryFloat { 0%,100% { transform: rotate(var(--tilt)) translateY(0); } 50% { transform: rotate(calc(var(--tilt) + 1deg)) translateY(-6px); } }
+        @keyframes memoryPop { 0% { transform: rotate(calc(var(--tilt) - 4deg)) scale(0.9); } 60% { transform: rotate(calc(var(--tilt) + 2deg)) scale(1.03); } 100% { transform: rotate(var(--tilt)) scale(1); } }
+        @keyframes memorySpark { 0% { opacity: 0; transform: translateY(0) scale(0.3); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-24px) scale(1); } }
+        @keyframes diaryPulse { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.02); } }
+        @keyframes diaryOpenFloat { 0% { transform: scale(0.96) rotate(-2deg); } 60% { transform: scale(1.02) rotate(1deg); } 100% { transform: scale(1) rotate(0); } }
+        @keyframes diaryHeartUp { 0% { opacity: 0; transform: translateY(0) scale(0.4); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px) scale(1.15); } }
+        @keyframes printOut {
+            0% { top: 34px; transform: translate(-50%, 0) scale(0.86); opacity: 0; }
+            8% { opacity: 1; }
+            55% { top: 235px; transform: translate(-50%, 0) scale(0.98) rotate(-2deg); }
+            100% { top: 280px; transform: translate(-50%, 0) scale(1) rotate(-4deg); opacity: 1; }
+        }
+        @keyframes printShine {
+            0% { left: -45%; opacity: 0; }
+            20% { opacity: 1; }
+            100% { left: 125%; opacity: 0; }
+        }
+        @keyframes cameraNudge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(2px); }
+        }
 
         /* HIDE YOUTUBE PLAYER (But keep it accessible) */
         .hidden-player {
@@ -404,7 +489,7 @@
                     <div class="music-disc-inner"><i class="fas fa-music" style="color:white; font-size: 1.5rem;"></i></div>
                 </div>
                 <h2 style="color: var(--secondary);">My Valentine 🌹</h2>
-                <p>for the one I love<br>ของขวัญวาเลนไทน์ปีนี้ คือการมีเธฮอยู่ข้าง ๆ เหมือนทุกวัน</p>
+                <p>for the one I love<br>ของขวัญวาเลนไทน์ปีนี้ คือการมีเธออยู่ข้าง ๆ เหมือนทุกวัน</p>
                 <div style="width: 100%;">
                     <!-- ลบปุ่ม "เปิดเพลง" ออก เหลือแต่ปุ่มเริ่ม -->
                     <button class="btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1.2rem;" onclick="startJourney()">
@@ -482,7 +567,7 @@
                 <h2>ความลับของเรา 🤫</h2>
                 <p>ขูดหน้าจอเพื่อดูรูปนะ</p>
                 <div id="scratch-wrapper">
-                    <img id="secret-img" src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&q=80">
+                    <iframe id="secret-img" src="https://drive.google.com/file/d/1N8MjK1PZWWFPrljT8H__118OyuEW1CxT/preview" allow="autoplay"></iframe>
                     <canvas id="scratch-canvas"></canvas>
                 </div>
                 <h3 id="reveal-msg" style="opacity:0; color:var(--accent); font-size:1.3rem; transition:0.5s; margin-top:5px;">น่ารักที่สุดเลย!</h3>
@@ -534,7 +619,7 @@
                 <button class="btn-back" onclick="navigate('screen-camera', 'screen-letter', 6)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
                 <h2 style="color:var(--dark-text); font-size: 2.5rem; text-shadow: 0 0 10px white; margin-bottom: 20px;">ยิ้มหวานๆ นะ 📸</h2>
                 
-                <div class="camera-wrapper">
+                <div class="camera-wrapper" id="camera-wrapper">
                     <div class="camera-body">
                         <div class="camera-screen">
                             <video id="webcam-video" class="camera-video" autoplay playsinline muted></video>
@@ -553,6 +638,7 @@
                 </div>
 
                 <p style="color:var(--dark-text); margin-top:20px; font-weight:bold; font-size:1.1rem; text-shadow: 0 0 5px white; background: rgba(255,255,255,0.5); padding: 5px 15px; border-radius: 20px;">กดปุ่มกลมๆ เพื่อถ่ายรูป</p>
+                <div id="print-status" class="print-status"></div>
             </div>
         </div>
 
@@ -562,7 +648,10 @@
                 <button class="btn-back" onclick="navigate('screen-memories', 'screen-camera', 7)"><i class="fas fa-arrow-left"></i></button>
                 <h2 style="font-family:'Pacifico'; color: var(--accent);">Our Memories</h2>
                 <div class="polaroid-wrapper">
-                    <img id="gallery-img" src="" class="polaroid-img">
+                    <div class="polaroid-media" id="polaroid-media">
+                        <img id="gallery-img" src="" class="polaroid-img">
+                        <iframe id="gallery-video" class="polaroid-video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                     <div id="gallery-caption" style="margin-top:10px; font-size:1.1rem; font-family:'Mali';"></div>
                 </div>
                 <div class="gallery-nav">
@@ -641,7 +730,7 @@
         <div id="screen-diary" class="screen">
             <div class="card" style="background:transparent; box-shadow:none; border:none;">
                 <button class="btn-back" onclick="navigate('screen-diary', 'screen-wishes', 12)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
-                <div class="diary-book" onclick="this.classList.toggle('open')">
+                <div class="diary-book" onclick="toggleDiaryBook(this)">
                     <div class="diary-cover" style="width:50%; height:100%; position:absolute; top:0; left:0; background:var(--secondary); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; border-radius:5px 0 0 5px; z-index:2; transition:transform 1s; transform-origin:left center;">
                         <h2>Our Diary</h2><p style="color:white;">Click to Open</p>
                     </div>
@@ -716,7 +805,7 @@
         class="hidden-player"
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/M8Ao4NeNhFE?si=P6bCPADufxvpcOZT&enablejsapi=1&controls=0&rel=0&playlist=afPnIMti1oo"
+        src="https://www.youtube.com/embed/M8Ao4NeNhFE?enablejsapi=1&playsinline=1&controls=0&rel=0&loop=1&playlist=M8Ao4NeNhFE"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -745,17 +834,17 @@
 
             // 4. รางวัลในกล่องสุ่ม (3 อย่าง)
             prizes: [
-                "บอกชอบดังๆ ❤️", 
+                "จุ๊บหน่อย! ❤️", 
                 "พาไปกินของอร่อย 🍱", 
                 "พาไปเที่ยว 1 ที่ 🏖️"
             ],
 
-            // 5. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ
+            // 5. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ (รองรับ ratio รายรูป)
             gallery: [
-                { src: "https://drive.google.com/file/d/1X2IWTOO97hLz9QOxGf5x4yROp3c8V4-9/view?usp=drivesdk", caption: "รูปคู่ใบแรกของเรา 📸" },
-                { src: "https://images.unsplash.com/photo-1516589178581-a7726952b195?w=600", caption: "ทริปไปปั้นเป็ดกันครั้งแรก 🐤" },
-                { src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️" },
-                { src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600", caption: "ก้องน่ารักที่สุดเลย 🌹" }
+                { src: "IMG_7330.PNG", caption: "รูปคู่ใบแรกของเรา 📸", type: "image" },
+                { src: "https://drive.google.com/file/d/1QbLz4aVkDaas7aEG1OGDRMfDhOTOrt1h/preview", caption: "ทริปไปปั้นเป็ดกันครั้งแรก 🐤", ratio: "3/4", type: "video" },
+                { src: "https://drive.google.com/file/d/1j8KMs7GHle-p6AEHxzdWJKVhYJB2XCal/preview", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️", ratio: "3/4", type: "video" },
+                { src: "https://drive.google.com/file/d/1XX-nr5JPb7AKuvgqAkr-a6oKHNsco-Z_/preview", caption: "ก้องน่ารักที่สุดเลย 🌹", type: "image" }
             ],
 
             // 6. คำถาม Deep Talk
@@ -768,7 +857,7 @@
             ],
 
             // 7. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
-            letter: "สุขสันวันวาเลนไทน์นะก้าอง ก้องคงรู้อยู่แล้วว่าไวท์ไม่ใช่คนพูดหวานเก่ง ไม่ถนัดเรื่องแสดงความรู้สึกซึ้งๆ เท่าไหร่ บางทีอาจจะดูนิ่งไปบ้าง แต่ไวท์อยากให้ก้องรู้นะครับว่า... ในความนิ่งนั้น ข้างในมันเต็มไปด้วยความรู้สึกดีๆ เสมอ เชื่อไหม... ทุกครั้งที่เราได้โทรคุยกัน แค่ได้ยินเสียงก้อง มันเหมือนระยะทางหรือความห่างไกลมันหายไปหมดเลย มันเหมือนก้องมานั่งอยู่ข้างๆ ไวท์ตรงนี้จริงๆ มันเป็นช่วงเวลาที่ไวท์มีความสุขและสบายใจที่สุด ไวท์ชอบเวลาก้องยิ้มนะ เพราะรอยยิ้มของก้องมันเหมาะสมที่สุดแล้วกับคำว่า เธฮคือความสดใสของโลกใบนี้ ไม่ว่าวันนั้นไวท์จะเจออะไรมา แค่เห็นก้องยิ้ม โลกของไวท์มันก็ดู อ่อนโยน ขึ้นทันที ขอบคุณจริงๆ ที่เข้ามาเป็นความสบายใจและเป็นพลังบวกให้กัน ไม่รู้ว่าอนาคตข้างหน้าจะเป็นยังไง ไวท์ไม่อยากสัญญาในสิ่งที่ยังมาไม่ถึง แต่สิ่งที่ไวท์มั่นใจที่สุดใน วันนี้ คือ... ไวท์อยากมีก้องอยู่ข้างๆ แบบนี้ไปเรื่อยๆ ภูมิใจในตัวก้องเสมอนะครับ เก่งมากแล้วนะ ยิ้มให้ไวท์ดูบ่อยๆ นะขอบคุณที่เข้ามาเป็นความสดใสในโลกของไวทืนะ แล้วก้องล่ะครับ... ในโลกของก้อง ยังอยากมีไวท์อยู่ข้างๆ แบบนี้มั้ย?"
+            letter: "สุขสันวันวาเลนไทน์นะก้อง ก้องคงรู้อยู่แล้วว่าไวท์ไม่ใช่คนพูดหวานเก่ง ไม่ถนัดเรื่องแสดงความรู้สึกซึ้งๆ เท่าไหร่ บางทีอาจจะดูนิ่งไปบ้าง แต่ไวท์อยากให้ก้องรู้นะครับว่า... ในความนิ่งนั้น ข้างในมันเต็มไปด้วยความรู้สึกดีๆ เสมอ เชื่อไหม... ทุกครั้งที่เราได้โทรคุยกัน แค่ได้ยินเสียงก้อง มันเหมือนระยะทางหรือความห่างไกลมันหายไปหมดเลย มันเหมือนก้องมานั่งอยู่ข้างๆ ไวท์ตรงนี้จริงๆ มันเป็นช่วงเวลาที่ไวท์มีความสุขและสบายใจที่สุด ไวท์ชอบเวลาก้องยิ้มนะ เพราะรอยยิ้มของก้องมันเหมาะสมที่สุดแล้วกับคำว่า เธฮคือความสดใสของโลกใบนี้ ไม่ว่าวันนั้นไวท์จะเจออะไรมา แค่เห็นก้องยิ้ม โลกของไวท์มันก็ดู อ่อนโยน ขึ้นทันที ขอบคุณจริงๆ ที่เข้ามาเป็นความสบายใจและเป็นพลังบวกให้กัน ไม่รู้ว่าอนาคตข้างหน้าจะเป็นยังไง ไวท์ไม่อยากสัญญาในสิ่งที่ยังมาไม่ถึง แต่สิ่งที่ไวท์มั่นใจที่สุดใน วันนี้ คือ... ไวท์อยากมีก้องอยู่ข้างๆ แบบนี้ไปเรื่อยๆ ภูมิใจในตัวก้องเสมอนะครับ เก่งมากแล้วนะ ยิ้มให้ไวท์ดูบ่อยๆ นะขอบคุณที่เข้ามาเป็นความสดใสในโลกของไวทืนะ แล้วก้องล่ะครับ... ในโลกของก้อง ยังอยากมีไวท์อยู่ข้างๆ แบบนี้มั้ย?"
         };
 
         /*******************************************************
@@ -794,6 +883,8 @@
         /* --- YOUTUBE IFRAME LOGIC --- */
         let playerFrame = null;
         let isMusicPlaying = false;
+        let playerReady = false;
+        let pendingPlay = false;
 
         function setMusicButtonState(playing) {
             const btn = document.getElementById('music-status');
@@ -818,10 +909,39 @@
             );
         }
 
+        function primePlayerUrl() {
+            if (!playerFrame) return;
+            try {
+                const url = new URL(playerFrame.src);
+                url.searchParams.set('origin', window.location.origin);
+                url.searchParams.set('enablejsapi', '1');
+                url.searchParams.set('playsinline', '1');
+                playerFrame.src = url.toString();
+            } catch (e) {
+                // Ignore invalid URL parsing; commands still try to run.
+            }
+        }
+
+        function requestPlayWithRetry(retries = 8) {
+            if (retries <= 0) return;
+            sendPlayerCommand('unMute');
+            sendPlayerCommand('setVolume', [100]);
+            sendPlayerCommand('playVideo');
+            setTimeout(() => {
+                if (!isMusicPlaying) return;
+                requestPlayWithRetry(retries - 1);
+            }, 250);
+        }
+
         function playMusic() {
+            if (!playerFrame) return;
+            pendingPlay = !playerReady;
+            sendPlayerCommand('unMute');
+            sendPlayerCommand('setVolume', [100]);
             sendPlayerCommand('playVideo');
             isMusicPlaying = true;
             setMusicButtonState(true);
+            requestPlayWithRetry();
         }
 
         function pauseMusic() {
@@ -832,7 +952,31 @@
 
         window.addEventListener('load', () => {
             playerFrame = document.getElementById('yt-player');
+            primePlayerUrl();
             setMusicButtonState(false);
+
+            playerFrame.addEventListener('load', () => {
+                playerReady = false;
+                if (!playerFrame || !playerFrame.contentWindow) return;
+                playerFrame.contentWindow.postMessage(
+                    JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }),
+                    'https://www.youtube.com'
+                );
+            });
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.origin !== 'https://www.youtube.com') return;
+            let data = event.data;
+            if (typeof data === 'string') {
+                try { data = JSON.parse(data); } catch (e) { return; }
+            }
+            if (!data || data.event !== 'onReady') return;
+            playerReady = true;
+            if (pendingPlay) {
+                pendingPlay = false;
+                playMusic();
+            }
         });
 
         // Start Journey Function (Triggers Play + Navigation)
@@ -975,9 +1119,17 @@
         /* --- REAL WEBCAM LOGIC --- */
         async function startCamera() {
             const video = document.getElementById('webcam-video');
-            const print = document.getElementById('printed-photo');
+            const wrapper = document.getElementById('camera-wrapper');
+            const shutter = document.querySelector('#camera-wrapper .shutter-btn');
+            const status = document.getElementById('print-status');
             document.getElementById('printed-photo').classList.remove('printing');
             document.getElementById('printed-photo').style.opacity = 0;
+            wrapper.classList.remove('printing-active');
+            if (shutter) shutter.disabled = false;
+            if (status) {
+                status.innerText = "";
+                status.classList.remove('show');
+            }
 
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 try {
@@ -1004,6 +1156,20 @@
             const photo = document.getElementById('result-photo');
             const flash = document.getElementById('camera-flash');
             const print = document.getElementById('printed-photo');
+            const wrapper = document.getElementById('camera-wrapper');
+            const shutter = document.querySelector('#camera-wrapper .shutter-btn');
+            const status = document.getElementById('print-status');
+
+            if (!video.videoWidth || !video.videoHeight) return;
+            if (shutter && shutter.disabled) return;
+            if (shutter) shutter.disabled = true;
+            if (status) {
+                status.innerText = "กำลังปริ้นรูป...";
+                status.classList.add('show');
+            }
+            wrapper.classList.add('printing-active');
+            print.classList.remove('printing');
+            void print.offsetWidth;
 
             // Flash effect
             flash.classList.add('flash-active');
@@ -1020,6 +1186,7 @@
             
             // Set image source
             photo.src = canvas.toDataURL('image/png');
+            CONFIG.gallery[0].src = photo.src;
 
             setTimeout(() => {
                 flash.classList.remove('flash-active');
@@ -1029,14 +1196,106 @@
                 
                 // Stop camera to save battery after taking photo
                 setTimeout(() => {
+                    if (status) status.innerText = "ปริ้นเสร็จแล้ว 💖";
                     navigate('screen-camera', 'screen-memories', 8);
+                    if (shutter) shutter.disabled = false;
+                    wrapper.classList.remove('printing-active');
+                    if (status) status.classList.remove('show');
                 }, 5000); // 5 Seconds delay
             }, 300);
         }
         
         let galIdx=0;
-        function changeSlide(n){ galIdx=(galIdx+n+CONFIG.gallery.length)%CONFIG.gallery.length; updateGalleryUI(); }
-        function updateGalleryUI(){ const d=CONFIG.gallery[galIdx]; const img=document.getElementById('gallery-img'); img.style.opacity=0; setTimeout(()=>{ img.src=d.src; document.getElementById('gallery-caption').innerText=d.caption; img.style.opacity=1; },200); }
+        function changeSlide(n){
+            galIdx=(galIdx+n+CONFIG.gallery.length)%CONFIG.gallery.length;
+            const wrapper = document.querySelector('.polaroid-wrapper');
+            if (wrapper) wrapper.style.setProperty('--tilt', `${-2 + (Math.random() * 4 - 2)}deg`);
+            updateGalleryUI();
+        }
+
+        function drivePreviewToImageSrc(src){
+            if (typeof src !== 'string') return src;
+            const match = src.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+            if (match && match[1]) return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w2000`;
+            return src;
+        }
+
+        function drivePreviewAutoplaySrc(src){
+            if (typeof src !== 'string') return src;
+            try {
+                const url = new URL(src);
+                url.searchParams.set('autoplay', '1');
+                url.searchParams.set('mute', '1');
+                url.searchParams.set('loop', '1');
+                return url.toString();
+            } catch (e) {
+                return src;
+            }
+        }
+
+        function spawnMemorySparkles(){
+            const wrapper = document.querySelector('.polaroid-wrapper');
+            if (!wrapper) return;
+            const icons = ['✨','💖','⭐'];
+            for(let i=0;i<7;i++){
+                const sp = document.createElement('span');
+                sp.className = 'memory-spark';
+                sp.innerText = icons[Math.floor(Math.random()*icons.length)];
+                sp.style.left = `${8 + Math.random()*84}%`;
+                sp.style.top = `${5 + Math.random()*70}%`;
+                sp.style.animationDelay = `${Math.random()*0.25}s`;
+                wrapper.appendChild(sp);
+                setTimeout(()=>sp.remove(), 1200);
+            }
+        }
+
+        function updateGalleryUI(){
+            const d=CONFIG.gallery[galIdx];
+            const img=document.getElementById('gallery-img');
+            const video=document.getElementById('gallery-video');
+            const media=document.getElementById('polaroid-media');
+            const wrapper=document.querySelector('.polaroid-wrapper');
+            media.style.aspectRatio = d.ratio || '4/3';
+            img.style.opacity=0;
+            video.style.opacity=0;
+            if (wrapper) {
+                wrapper.classList.remove('slide-enter');
+                void wrapper.offsetWidth;
+                wrapper.classList.add('slide-enter');
+            }
+            setTimeout(()=>{
+                // Stop old iframe playback when slide changes
+                video.src = '';
+                if (d.type === 'video') {
+                    img.style.display = 'none';
+                    video.style.display = 'block';
+                    video.src = drivePreviewAutoplaySrc(d.src);
+                    video.style.opacity = 1;
+                } else {
+                    video.style.display = 'none';
+                    img.style.display = 'block';
+                    img.src = drivePreviewToImageSrc(d.src);
+                    img.style.opacity = 1;
+                }
+                document.getElementById('gallery-caption').innerText=d.caption;
+                spawnMemorySparkles();
+            },200);
+        }
+
+        function toggleDiaryBook(el){
+            const isOpen = el.classList.toggle('open');
+            if (!isOpen) return;
+            fireConfetti();
+            for(let i=0;i<8;i++){
+                const heart = document.createElement('span');
+                heart.className = 'diary-heart';
+                heart.innerText = ['💖','❤️','✨'][Math.floor(Math.random()*3)];
+                heart.style.left = `${10 + Math.random()*80}%`;
+                heart.style.top = `${50 + Math.random()*35}%`;
+                el.appendChild(heart);
+                setTimeout(()=>heart.remove(), 1200);
+            }
+        }
 
         function updateDeepTalkUI() {
             const card = document.getElementById('talk-card');
