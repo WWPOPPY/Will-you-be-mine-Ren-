@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Valentine's Day to my love ❤️</title>
+    <title>Will you be my boyfriend? 🤍</title>
     
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -477,12 +477,11 @@
                 <div class="music-disc-large" id="intro-disc">
                     <div class="music-disc-inner"><i class="fas fa-music" style="color:white; font-size: 1.5rem;"></i></div>
                 </div>
-                <h2 style="color: var(--secondary);">My Valentine 🌹</h2>
-                <p>for the one I love<br>ของขวัญวาเลนไทน์ปีนี้ คือการมีเธออยู่ข้าง ๆ เหมือนทุกวัน</p>
+                <h2 style="color: var(--secondary);">ถึง เร็น... 🌹</h2>
+                <p>จาก ไวท์ เองนะ<br>วันนี้มีคำถามสำคัญอยากจะถาม... ลองกดเข้าไปดูสิ</p>
                 <div style="width: 100%;">
-                    <!-- ลบปุ่ม "เปิดเพลง" ออก เหลือแต่ปุ่มเริ่ม -->
                     <button class="btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1.2rem;" onclick="startJourney()">
-                        ไปต่อเลย 🤍
+                        เปิดใจดูนะ 🤍
                     </button>
                 </div>
             </div>
@@ -492,7 +491,7 @@
         <div id="screen-quiz" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-quiz', 'screen-intro', 0)"><i class="fas fa-chevron-left"></i></button>
-                <h2>Mission 1: วัดใจ</h2>
+                <h2>Mission 1: ทดสอบใจ</h2>
                 <h3 id="quiz-q" style="color: var(--accent); margin: 20px 0; font-size: 1.3rem;">คำถาม...</h3>
                 <div id="quiz-opts" style="width: 100%;"></div>
             </div>
@@ -503,7 +502,7 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-hug', 'screen-quiz', 2)"><i class="fas fa-arrow-left"></i></button>
                 <h2>Mission 2: ภารกิจกอด ❤️</h2>
-                <p id="hug-instruction">กดปุ่มแล้วกอดกัน 10 วินาที<br>เพื่อรับ "ของขวัญพิเศษ"!</p>
+                <p id="hug-instruction">กอดออนไลน์จากไวท์ 10 วินาที<br>เพื่อรับ "ของขวัญพิเศษ"!</p>
                 
                 <div class="hug-anim-container">
                     <div id="hug-btn" class="hug-emoji" onclick="startHugMission()">🫂</div>
@@ -570,11 +569,11 @@
         <div id="screen-letter" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-letter', 'screen-cake', 4)"><i class="fas fa-arrow-left"></i></button>
-                <h2>จดหมายถึงคนอ่าน ที่ชื่อ ก้อง </h2>
+                <h2>จดหมายถึงคนอ่าน ที่ชื่อ เร็น </h2>
                 <div class="letter-paper">
                     <span id="typewriter-text"></span><span class="cursor">|</span>
                 </div>
-                <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...คนที่ตั้งใจ(รัก)ก้องที่สุด ❤️</p>
+                <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...คนที่ตั้งใจ(รัก)เร็นที่สุด (ไวท์เอง) ❤️</p>
                 <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 6)">
                     ไปถ่ายรูปกัน 📸
                 </button>
@@ -654,18 +653,18 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-promise', 'screen-deeptalk', 8)"><i class="fas fa-arrow-left"></i></button>
                 <h2>สัญญาใจ 🤙</h2>
-                <p>กดเพื่อประทับตราสัญญา</p>
+                <p>กดเพื่อประทับตราสัญญาของไวท์</p>
                 <div class="promise-list">
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะชอบก้องคนเดียว</span>
+                        <span>จะรักและดูแลเร็นคนเดียว</span>
                         <div class="stamp-mark"><i class="fas fa-heart"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะพาก้องไปกินของอร่อย</span>
+                        <span>จะพาเร็นไปกินของอร่อยทุกที่</span>
                         <div class="stamp-mark"><i class="fas fa-utensils"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะไม่ดื้อ (มั้ง)</span>
+                        <span>จะไม่ดื้อกับเร็น (มั้งนะ)</span>
                         <div class="stamp-mark"><i class="fas fa-smile-wink"></i></div>
                     </div>
                 </div>
@@ -705,7 +704,7 @@
                     </div>
                     <div class="diary-page" style="width:50%; height:100%; position:absolute; top:0; left:50%; background:#fffcf5; border:1px solid #ddd; padding:10px; display:flex; justify-content:center; align-items:center; z-index:1; border-radius:0 5px 5px 0;">
                         <!-- EDIT: ข้อความในไดอารี่ -->
-                        <p>วันนี้เป็นวันที่ดีที่สุดเลย<br>ขอบคุณที่มีก้องเข้ามา<br>ในชีวิตครับ ❤️</p>
+                        <p>บันทึกของไวท์<br>ขอบคุณที่มีเร็นเข้ามา<br>ในชีวิตนะครับ ❤️</p>
                     </div>
                 </div>
                 <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-diary', 'screen-stay', 13)">ไปต่อ ➜</button>
@@ -717,8 +716,8 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 12)"><i class="fas fa-arrow-left"></i></button>
                 <div class="couple-emoji">👨‍❤️‍👨</div>
-                <h2 style="font-size:2rem; color:var(--accent);">อยู่ด้วยกันนานๆ นะ</h2>
-                <p>น่ารักที่สุดเลยยยย ❤️</p>
+                <h2 style="font-size:2rem; color:var(--accent);">อยากมีเร็นอยู่ข้างๆ</h2>
+                <p>ตลอดไปเลยนะ ❤️</p>
                 <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 14)">ดูเวลาของเรา ⏳</button>
             </div>
         </div>
@@ -728,7 +727,7 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-timer', 'screen-stay', 13)"><i class="fas fa-arrow-left"></i></button>
                 <i class="fas fa-hourglass-start" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px; animation: float 3s infinite;"></i>
-                <h2>เวลาของเรา</h2>
+                <h2>เวลาที่เรามีกัน</h2>
                 <div class="timer-grid">
                     <div class="timer-box"><span class="timer-val" id="t-days">0</span><span>วัน</span></div>
                     <div class="timer-box"><span class="timer-val" id="t-hours">0</span><span>ชม.</span></div>
@@ -736,7 +735,7 @@
                     <div class="timer-box"><span class="timer-val" id="t-secs">0</span><span>วิ</span></div>
                 </div>
                 <p id="start-date-label">นับตั้งแต่...</p>
-                <button class="btn-primary" onclick="navigate('screen-timer', 'screen-finale', 15)">ฉลอง! 🎉</button>
+                <button class="btn-primary" onclick="navigate('screen-timer', 'screen-finale', 15)">และสุดท้าย... 🎉</button>
             </div>
         </div>
 
@@ -745,9 +744,9 @@
             <div class="finale-content">
                 <!-- SVG Handwriting -->
                 <svg class="writing-svg" viewBox="0 0 1000 300">
-                    <text x="50" y="150" class="brush-text" id="ft-1">Happy</text>
-                    <text x="350" y="150" class="brush-text" id="ft-2">Valentine's</text>
-                    <text x="800" y="150" class="brush-text" id="ft-3">Day</text>
+                    <text x="150" y="150" class="brush-text" id="ft-1">Be</text>
+                    <text x="350" y="150" class="brush-text" id="ft-2">My</text>
+                    <text x="600" y="150" class="brush-text" id="ft-3">Boyfriend?</text>
                 </svg>
                 
                 <!-- Cartoon Scene -->
@@ -760,7 +759,7 @@
                 <!-- Bouquet Popup -->
                 <div id="bouquet-container" class="bouquet-wrapper">
                     <span class="bouquet-img">💐</span>
-                    <div class="bouquet-msg">สำหรับเธอคนเดียว ❤️</div>
+                    <div class="bouquet-msg">เป็นแฟนกันนะ เร็น ❤️</div>
                 </div>
             </div>
             <button class="btn-back" onclick="prevStep('screen-finale', 'screen-timer', 14)" style="top:30px; left:30px; color: #d62828;"><i class="fas fa-arrow-left"></i></button>
@@ -788,14 +787,14 @@
          * แก้ไขข้อมูลด้านล่างนี้ได้เลยครับ (แก้ในเครื่องหมาย "")
          *******************************************************/
         const CONFIG = {
-            // 1. วันที่เริ่มคบกัน (ปี-เดือน-วันTเวลา)
+            // 1. วันที่เริ่มรู้จักกัน (ปี-เดือน-วันTเวลา)
             startDate: "2026-02-06T00:20:00", 
 
             // 2. คำถามแฟนพันธุ์แท้ (แก้คำถาม, ตัวเลือก, และเลขข้อที่ถูก เริ่มนับจาก 0)
             quiz: [
-                { q: "เราเจอกันครั้งแรกที่ไหน?", opts: ["โรงเรียน", "ห้าง", "ทะเล", "สวนสาธารณะ"], a: 3 },
-                { q: "น้ำดื่มที่ไวท์ชอบที่สุด?", opts: ["Purra", "Ichitan pH Plus (อิชิตัน น้ำด่าง)", "Singha", "Mont Fleur"], a: 1 },
-                { q: "เดทแรกเราไปทำอะไรกัน?", opts: ["ปั่นเรือเป็ด", "เดินห้าง", "ไปทะเล", "ขับรถเล่น"], a: 0 }
+                { q: "ไวท์ชอบอะไรในตัวเร็นที่สุด?", opts: ["รอยยิ้ม", "ความใจดี", "ความน่ารัก", "ชอบทุกอย่างเลย!"], a: 3 },
+                { q: "ถ้าให้ไวท์เลือกไปเที่ยวกับเร็น อยากไปไหน?", opts: ["ภูเขา", "ทะเล", "คาเฟ่", "ไปไหนก็ได้ที่มีเร็น"], a: 3 },
+                { q: "ไวท์คิดถึงเร็นบ่อยแค่ไหน?", opts: ["บางเวลา", "ตอนตื่นนอน", "ก่อนนอน", "ตลอดยี่สิบสี่ชั่วโมง!"], a: 3 }
             ],
 
             // 3. รางวัลในกล่องสุ่ม (3 อย่าง)
@@ -807,23 +806,23 @@
 
             // 4. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ (รองรับ ratio รายรูป)
             gallery: [
-                { src: "IMG_7330.PNG", caption: "รูปคู่ใบแรกของเรา 📸", type: "image" },
-                { src: "https://drive.google.com/file/d/1QbLz4aVkDaas7aEG1OGDRMfDhOTOrt1h/preview", caption: "ทริปไปปั้นเป็ดกันครั้งแรก 🐤", ratio: "3/4", type: "video" },
+                { src: "IMG_7330.PNG", caption: "รูปของเรา 📸", type: "image" },
+                { src: "https://drive.google.com/file/d/1QbLz4aVkDaas7aEG1OGDRMfDhOTOrt1h/preview", caption: "เวลาอยู่กับเร็น ไวท์มีความสุขที่สุดเลย 🐤", ratio: "3/4", type: "video" },
                 { src: "https://drive.google.com/file/d/1j8KMs7GHle-p6AEHxzdWJKVhYJB2XCal/preview", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️", ratio: "3/4", type: "video" },
-                { src: "https://drive.google.com/file/d/1XX-nr5JPb7AKuvgqAkr-a6oKHNsco-Z_/preview", caption: "ก้องน่ารักที่สุดเลย 🌹", type: "image" }
+                { src: "https://drive.google.com/file/d/1XX-nr5JPb7AKuvgqAkr-a6oKHNsco-Z_/preview", caption: "เร็นน่ารักที่สุดสำหรับไวท์เสมอ 🌹", type: "image" }
             ],
 
             // 5. คำถาม Deep Talk
             deepTalk: [
-                "อะไรคือคุณสมบัติที่สำคัญที่สุดที่เราสองคนมองหาในความสัมพันธ์?",
-                "เราสองคน เชื่อว่าการให้อภัยในความสัมพันธ์เป็นเรื่องสำคัญแค่ไหน?",
-                "อะไรคือสิ่งที่ทำให้เราสองคนรู้สึกปลอดภัยในความสัมพันธ์?",
-                "เวลาเราสองคนเหนื่อยไม่ไหวเราสองคนจะช่วยเหลือซึ่งกันและกันอย่างไร?",
-                "ในสายตาอีกฝ่ายเป็นคนแบบไหน?"
+                "อะไรคือสิ่งที่เร็นประทับใจในตัวไวท์บ้าง?",
+                "เร็นรู้สึกยังไงเวลาที่เราได้คุยกัน?",
+                "เร็นเคยคิดภาพอนาคตที่มีไวท์อยู่ด้วยไหม?",
+                "ถ้าวันนี้สถานะของเราเปลี่ยนไป เร็นพร้อมไหม?",
+                "ในสายตาเร็น ไวท์เป็นคนแบบไหน?"
             ],
 
             // 6. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
-            letter: "สุขสันวันวาเลนไทน์นะก้อง ก้องคงรู้อยู่แล้วว่าไวท์ไม่ใช่คนพูดหวานเก่ง ไม่ถนัดเรื่องแสดงความรู้สึกซึ้งๆ เท่าไหร่ บางทีอาจจะดูนิ่งไปบ้าง แต่ไวท์อยากให้ก้องรู้นะครับว่า... ในความนิ่งนั้น ข้างในมันเต็มไปด้วยความรู้สึกดีๆ เสมอ เชื่อไหม... ทุกครั้งที่เราได้โทรคุยกัน แค่ได้ยินเสียงก้อง มันเหมือนระยะทางหรือความห่างไกลมันหายไปหมดเลย มันเหมือนก้องมานั่งอยู่ข้างๆ ไวท์ตรงนี้จริงๆ มันเป็นช่วงเวลาที่ไวท์มีความสุขและสบายใจที่สุด ไวท์ชอบเวลาก้องยิ้มนะ เพราะรอยยิ้มของก้องมันเหมาะสมที่สุดแล้วกับคำว่า เธฮคือความสดใสของโลกใบนี้ ไม่ว่าวันนั้นไวท์จะเจออะไรมา แค่เห็นก้องยิ้ม โลกของไวท์มันก็ดู อ่อนโยน ขึ้นทันที ขอบคุณจริงๆ ที่เข้ามาเป็นความสบายใจและเป็นพลังบวกให้กัน ไม่รู้ว่าอนาคตข้างหน้าจะเป็นยังไง ไวท์ไม่อยากสัญญาในสิ่งที่ยังมาไม่ถึง แต่สิ่งที่ไวท์มั่นใจที่สุดใน วันนี้ คือ... ไวท์อยากมีก้องอยู่ข้างๆ แบบนี้ไปเรื่อยๆ ภูมิใจในตัวก้องเสมอนะครับ เก่งมากแล้วนะ ยิ้มให้ไวท์ดูบ่อยๆ นะขอบคุณที่เข้ามาเป็นความสดใสในโลกของไวทืนะ แล้วก้องล่ะครับ... ในโลกของก้อง ยังอยากมีไวท์อยู่ข้างๆ แบบนี้มั้ย?"
+            letter: "ถึง เร็น... ไวท์เองนะ เร็นรู้ไหมว่าตั้งแต่มีเร็นเข้ามาในชีวิต ทุกๆ วันของไวท์ก็เปลี่ยนไป ไวท์ยิ้มบ่อยขึ้น มีความสุขกับเรื่องเล็กๆ น้อยๆ มากขึ้น แค่ได้คุยกัน ได้ยินเสียงเร็น ไวท์ก็รู้สึกดีมากๆ แล้ว ไวท์อาจจะไม่ใช่คนที่พูดความรู้สึกเก่งนัก แต่ทุกสิ่งที่ไวท์ทำให้ ไวท์ตั้งใจทำเพื่อเร็นจริงๆ นะ ขอบคุณที่เข้ามาเป็นความสบายใจ เป็นรอยยิ้ม และเป็นความสดใสในโลกของไวท์... วันนี้ไวท์ไม่อยากเป็นแค่คนคุย หรือเป็นแค่พี่น้องแล้ว ไวท์อยากดูแลเร็นให้ดีกว่านี้ อยากมีเร็นอยู่ข้างๆ ในทุกๆ วัน... เร็นครับ... เป็นแฟนกับไวท์นะ?"
         };
 
         /*******************************************************
@@ -1032,7 +1031,7 @@
             document.getElementById('hug-btn').style.display='none';
             document.getElementById('hug-timer').style.display='block';
             document.getElementById('hug-progress').style.display='block';
-            document.getElementById('hug-instruction').innerText = "กอดแน่นๆ นะ... ";
+            document.getElementById('hug-instruction').innerText = "กอดออนไลน์แน่นๆ นะ... ";
             
             let t=10; 
             const timer=setInterval(()=>{
@@ -1302,7 +1301,7 @@
         function plantFlower(e){ const f=document.createElement('div'); f.className='flower'; f.innerText=['🌻','🌷','🌹','🌸','🌺'][Math.floor(Math.random()*5)]; const r=document.getElementById('garden-area').getBoundingClientRect(); f.style.left=(e.clientX-r.left-15)+'px'; document.getElementById('garden-area').appendChild(f); }
         function popStar(){ const msgs=["รักนะ","คิดถึง","คนเก่ง","จุ๊บๆ"]; document.getElementById('wish-text').innerText=msgs[Math.floor(Math.random()*msgs.length)]; fireConfetti(); }
 
-        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่ "+new Date(CONFIG.startDate).toLocaleDateString('th-TH'); }
+        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่วันแรกที่เราได้รู้จักกัน "+new Date(CONFIG.startDate).toLocaleDateString('th-TH'); }
 
         // Finale
         function playFinale() {
@@ -1386,14 +1385,14 @@
     
     <!-- 
     
-    _    _                           ____        _            _   _            _       
-   | |  | |                         |  _ \      | |          | | (_)          ( )      
-   | |__| | __ _ _ __  _ __  _   _  | |_) |_   _| | ___ _ __ | |_ _ _ __   ___|/ ___  
-   |  __  |/ _` | '_ \| '_ \| | | | |  _ <| | | | |/ _ \ '_ \| __| | '_ \ / _ \ / __| 
-   | |  | | (_| | |_) | |_) | |_| | | |_) | |_| | |  __/ | | | |_| | | | |  __/ \__ \ 
-   |_|  |_|\__,_| .__/| .__/ \__, | |____/ \__,_|_|\___|_| |_|\__|_|_| |_|\___| |___/ 
-                | |   | |     __/ |                                                   
-                |_|   |_|    |___/                                                    
+    _    _                            ____        _            _   _            _       
+   | |  | |                          |  _ \      | |          | | (_)          ( )      
+   | |__| | __ _ _ __  _ __  _   _   | |_) |_   _| | ___ _ __ | |_ _ _ __   ___|/ ___  
+   |  __  |/ _` | '_ \| '_ \| | | |  |  _ <| | | | |/ _ \ '_ \| __| | '_ \ / _ \ / __| 
+   | |  | | (_| | |_) | |_) | |_| |  | |_) | |_| | |  __/ | | | |_| | | | |  __/ \__ \ 
+   |_|  |_|\__,_| .__/| .__/ \__, |  |____/ \__,_|_|\___|_| |_|\__|_|_| |_|\___| |___/ 
+                | |   | |     __/ |                                                    
+                |_|   |_|    |___/                                                     
     
     Made with ❤️ for You.
     Code by Your Special One.
