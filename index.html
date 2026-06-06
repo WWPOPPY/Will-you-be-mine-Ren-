@@ -822,14 +822,27 @@
             ],
 
             // 6. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
-            letter: ""นี่ใครเนี่ย... คนโรคจิตคนนึงป่ะ? 😅 เอาจริงๆ ที่ผมพูดว่าคบกันเลยมั้ย ผมไม่ได้พูดเล่นนะเว้ย ถ้ามันใช่ คุยนานไปก็เสียเวลาเปล่าวะ พี่ว่ามั้ย? ไม่รู้ทำไมตัวเองถึงยอมให้คนโรคจิตคนนี้เข้ามาในชีวิตด้วยเนี่ย... แต่ก็ดีแล้วแหละ เพราะการมีพี่อยู่ในทุกๆ วัน มันทำให้ผมโคตรแฮปปี้เลย วันนี้ผมไม่อยากเป็นแค่คนคุย หรือเป็นแค่พี่น้องแล้ว... ผมอยากให้พี่มาดูแลผม อยากมีพี่เร็นอยู่ข้างๆ ในทุกๆ วัน
+            letter: `นี่ใครเนี่ย... คนโรคจิตคนนึงป่ะ? 😅 เอาจริงๆ ที่ผมพูดว่าคบกันเลยมั้ย ผมไม่ได้พูดเล่นนะเว้ย ถ้ามันใช่ คุยนานไปก็เสียเวลาเปล่าวะ พี่ว่ามั้ย? ไม่รู้ทำไมตัวเองถึงยอมให้คนโรคจิตคนนี้เข้ามาในชีวิตด้วยเนี่ย... แต่ก็ดีแล้วแหละ เพราะการมีพี่อยู่ในทุกๆ วัน มันทำให้ผมโคตรแฮปปี้เลย วันนี้ผมไม่อยากเป็นแค่คนคุย หรือเป็นแค่พี่น้องแล้ว... ผมอยากให้พี่มาดูแลผม อยากมีพี่เร็นอยู่ข้างๆ ในทุกๆ วัน`,
         };
 
         /*******************************************************
          * END CONFIGURATION (อย่าแก้โค้ดด้านล่างถ้าไม่จำเป็น)
          *******************************************************/
 
-        let state = { quizIndex: 0, promiseCount: 0, talkIndex: 0, cameraStream: null };
+        let state = {
+            quizIndex: 0,
+            promiseCount: 0,
+            talkIndex: 0,
+            cameraStream: null,
+            cameraSessionId: 0,
+            hugInterval: null,
+            hugCompleted: false,
+            timerInterval: null,
+            typewriterTimeout: null,
+            photoFlashTimeout: null,
+            photoRevealTimeout: null,
+            finaleTimeouts: [],
+        };
 
         // Global Effects
         document.addEventListener('click', (e) => {
@@ -846,10 +859,92 @@
         animateBg();
 
         /* --- YOUTUBE IFRAME LOGIC --- */
-        let playerFrame = null;
+        let playerFrame = document.getElementById('yt-player');
         let isMusicPlaying = false;
         let playerReady = false;
         let pendingPlay = false;
+
+        function clearPhotoTimeouts() {
+            if (state.photoFlashTimeout) {
+                clearTimeout(state.photoFlashTimeout);
+                state.photoFlashTimeout = null;
+            }
+            if (state.photoRevealTimeout) {
+                clearTimeout(state.photoRevealTimeout);
+                state.photoRevealTimeout = null;
+            }
+        }
+
+        function stopTimer() {
+            if (state.timerInterval) {
+                clearInterval(state.timerInterval);
+                state.timerInterval = null;
+            }
+        }
+
+        function stopTypeWriter() {
+            if (state.typewriterTimeout) {
+                clearTimeout(state.typewriterTimeout);
+                state.typewriterTimeout = null;
+            }
+        }
+
+        function stopHugMission() {
+            if (state.hugInterval) {
+                clearInterval(state.hugInterval);
+                state.hugInterval = null;
+            }
+
+            if (state.hugCompleted) return;
+
+            const hugBtn = document.getElementById('hug-btn');
+            const hugTimer = document.getElementById('hug-timer');
+            const hugProgress = document.getElementById('hug-progress');
+            const hugInstruction = document.getElementById('hug-instruction');
+            const mysterySection = document.getElementById('mystery-section');
+            const hugMsg = document.getElementById('hug-msg');
+            const nextBtn = document.getElementById('btn-hug-next');
+
+            if (hugBtn) hugBtn.style.display = 'block';
+            if (hugTimer) {
+                hugTimer.style.display = 'none';
+                hugTimer.innerText = '10';
+            }
+            if (hugProgress) {
+                hugProgress.style.display = 'none';
+                const fill = document.getElementById('hug-fill');
+                if (fill) fill.style.width = '0%';
+            }
+            if (hugInstruction) {
+                hugInstruction.style.display = 'block';
+                hugInstruction.innerHTML = 'หอมแก้มออนไลน์หรือจะสู่ หอมแก้มจริง <br>เพื่อรับ "ของขวัญพิเศษ"!';
+            }
+            if (mysterySection) mysterySection.style.display = 'none';
+            if (hugMsg) {
+                hugMsg.style.opacity = 0;
+                hugMsg.innerHTML = '';
+            }
+            if (nextBtn) nextBtn.style.display = 'none';
+            document.querySelectorAll('.mystery-box').forEach((box) => {
+                box.classList.remove('opened', 'shaking');
+                box.innerHTML = '🎁';
+            });
+        }
+
+        function clearFinaleAnimations() {
+            state.finaleTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+            state.finaleTimeouts = [];
+            document.querySelectorAll('.floating-balloon').forEach((balloon) => balloon.remove());
+        }
+
+        function queueFinaleTimeout(fn, delay) {
+            const timeoutId = setTimeout(() => {
+                state.finaleTimeouts = state.finaleTimeouts.filter((id) => id !== timeoutId);
+                fn();
+            }, delay);
+            state.finaleTimeouts.push(timeoutId);
+            return timeoutId;
+        }
 
         function getPlayerOrigin() {
             if (!playerFrame) return 'https://www.youtube.com';
@@ -924,6 +1019,7 @@
 
         function pauseMusic() {
             sendPlayerCommand('pauseVideo');
+            pendingPlay = false;
             isMusicPlaying = false;
             setMusicButtonState(false);
         }
@@ -978,6 +1074,10 @@
         function navigate(fromId, toId, stepIndex) {
             // Stop Camera if leaving camera screen
             if(fromId === 'screen-camera') stopCamera();
+            if(fromId === 'screen-hug') stopHugMission();
+            if(fromId === 'screen-timer') stopTimer();
+            if(fromId === 'screen-letter') stopTypeWriter();
+            if(fromId === 'screen-finale') clearFinaleAnimations();
 
             document.getElementById(fromId).classList.add('exit');
             document.getElementById(fromId).classList.remove('active');
@@ -1006,6 +1106,10 @@
         function prevStep(c,p,s){
             // Specific Logic for Back Button
             if(c === 'screen-camera') stopCamera();
+            if(c === 'screen-hug') stopHugMission();
+            if(c === 'screen-timer') stopTimer();
+            if(c === 'screen-letter') stopTypeWriter();
+            if(c === 'screen-finale') clearFinaleAnimations();
             document.getElementById(c).classList.remove('active');
             document.getElementById(p).classList.remove('exit');
             document.getElementById(p).classList.add('active');
@@ -1028,18 +1132,25 @@
 
         /* --- HUG & GACHAPON LOGIC --- */
         function startHugMission(){
+            if (state.hugInterval) {
+                clearInterval(state.hugInterval);
+                state.hugInterval = null;
+            }
+            state.hugCompleted = false;
             document.getElementById('hug-btn').style.display='none';
             document.getElementById('hug-timer').style.display='block';
             document.getElementById('hug-progress').style.display='block';
             document.getElementById('hug-instruction').innerText = "กอดออนไลน์แน่นๆ นะ... ";
             
             let t=10; 
-            const timer=setInterval(()=>{
+            state.hugInterval=setInterval(()=>{
                 t--; document.getElementById('hug-timer').innerText=t;
                 document.getElementById('hug-fill').style.width=((10-t)*10)+'%';
                 
                 if(t<=0){ 
-                    clearInterval(timer); 
+                    clearInterval(state.hugInterval);
+                    state.hugInterval = null;
+                    state.hugCompleted = true;
                     document.getElementById('hug-timer').style.display='none'; 
                     document.getElementById('hug-progress').style.display='none';
                     document.getElementById('hug-instruction').style.display='none';
@@ -1070,8 +1181,27 @@
 
         /* --- SCRATCH --- */
         function initScratch(){
-            const c=document.getElementById('scratch-canvas'); const ctx=c.getContext('2d');
-            const w=document.getElementById('scratch-wrapper'); c.width=w.offsetWidth; c.height=w.offsetHeight;
+            let c=document.getElementById('scratch-canvas');
+            const w=document.getElementById('scratch-wrapper');
+            const revealMsg = document.getElementById('reveal-msg');
+            const nextBtn = document.getElementById('btn-scratch-next');
+
+            if (!c && w) {
+                c = document.createElement('canvas');
+                c.id = 'scratch-canvas';
+                w.appendChild(c);
+            }
+            if (!c || !w) return;
+
+            c.style.display = 'block';
+            c.style.opacity = 1;
+            c.style.pointerEvents = 'auto';
+            c.style.transition = 'opacity 1s';
+            if (revealMsg) revealMsg.style.opacity = 0;
+            if (nextBtn) nextBtn.style.display = 'none';
+
+            const ctx=c.getContext('2d');
+            c.width=w.offsetWidth; c.height=w.offsetHeight;
             ctx.fillStyle="#ffb3c1"; ctx.fillRect(0,0,c.width,c.height);
             ctx.fillStyle="#fff"; ctx.font="bold 24px Mali"; ctx.textAlign="center"; ctx.fillText("ขูดเลย!",c.width/2,c.height/2);
             let isD=false;
@@ -1079,17 +1209,19 @@
                 ctx.globalCompositeOperation='destination-out'; ctx.beginPath(); ctx.arc(x,y,30,0,Math.PI*2); ctx.fill(); 
                 const d=ctx.getImageData(0,0,c.width,c.height).data; let cnt=0; 
                 for(let i=3;i<d.length;i+=256) if(d[i]===0) cnt++;
-                if(cnt>(d.length/256)*0.4){ c.style.transition="opacity 1s"; c.style.opacity=0; document.getElementById('reveal-msg').style.opacity=1; document.getElementById('btn-scratch-next').style.display='inline-flex'; setTimeout(()=>c.remove(),1000); }
+                if(cnt>(d.length/256)*0.4){ c.style.opacity=0; c.style.pointerEvents='none'; if(revealMsg) revealMsg.style.opacity=1; if(nextBtn) nextBtn.style.display='inline-flex'; }
             };
             c.onmousedown=()=>isD=true; window.onmouseup=()=>isD=false; c.onmousemove=(e)=>{if(isD){const r=c.getBoundingClientRect();scratch(e.clientX-r.left,e.clientY-r.top);}};
             c.ontouchstart=()=>isD=true; window.ontouchend=()=>isD=false; c.ontouchmove=(e)=>{if(isD){const r=c.getBoundingClientRect();scratch(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top);}};
         }
 
         function addTop(e){ const el=document.createElement('div'); el.className='topping'; el.innerText=e; el.style.left=(Math.random()*70+15)+'%'; el.style.top=(Math.random()*50+20)+'%'; document.getElementById('cake-area').appendChild(el); }
-        function typeWriter(){ const el=document.getElementById('typewriter-text'); el.innerHTML=""; let i=0; function type(){ if(i<CONFIG.letter.length){ el.innerHTML+=CONFIG.letter.charAt(i); i++; setTimeout(type,30); } } type(); }
+        function typeWriter(){ stopTypeWriter(); const el=document.getElementById('typewriter-text'); if(!el) return; el.innerHTML=""; let i=0; function type(){ if(i<CONFIG.letter.length){ el.innerHTML+=CONFIG.letter.charAt(i); i++; state.typewriterTimeout = setTimeout(type,30); } else { state.typewriterTimeout = null; } } type(); }
         
         /* --- REAL WEBCAM LOGIC --- */
         async function startCamera() {
+            const sessionId = ++state.cameraSessionId;
+            clearPhotoTimeouts();
             const video = document.getElementById('webcam-video');
             const wrapper = document.getElementById('camera-wrapper');
             const shutter = document.querySelector('#camera-wrapper .shutter-btn');
@@ -1106,6 +1238,11 @@
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+                    const cameraScreen = document.getElementById('screen-camera');
+                    if (sessionId !== state.cameraSessionId || !cameraScreen || !cameraScreen.classList.contains('active')) {
+                        stream.getTracks().forEach(track => track.stop());
+                        return;
+                    }
                     video.srcObject = stream;
                     state.cameraStream = stream;
                 } catch (err) {
@@ -1116,6 +1253,8 @@
         }
 
         function stopCamera() {
+            state.cameraSessionId += 1;
+            clearPhotoTimeouts();
             if (state.cameraStream) {
                 state.cameraStream.getTracks().forEach(track => track.stop());
                 state.cameraStream = null;
@@ -1123,6 +1262,7 @@
         }
 
         function takeRealPhoto() {
+            clearPhotoTimeouts();
             const video = document.getElementById('webcam-video');
             const canvas = document.getElementById('capture-canvas');
             const photo = document.getElementById('result-photo');
@@ -1160,14 +1300,16 @@
             photo.src = canvas.toDataURL('image/png');
             CONFIG.gallery[0].src = photo.src;
 
-            setTimeout(() => {
+            state.photoFlashTimeout = setTimeout(() => {
+                state.photoFlashTimeout = null;
                 flash.classList.remove('flash-active');
                 
                 // Add printing class to animate
                 print.classList.add('printing');
                 
                 // Stop camera to save battery after taking photo
-                setTimeout(() => {
+                state.photoRevealTimeout = setTimeout(() => {
+                    state.photoRevealTimeout = null;
                     if (status) status.innerText = "ปริ้นเสร็จแล้ว 💖";
                     navigate('screen-camera', 'screen-memories', 7);
                     if (shutter) shutter.disabled = false;
@@ -1309,10 +1451,24 @@
             return `${day}/${month}/${year}`;
         }
 
-        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่วันแรกที่เราได้รู้จักกัน "+formatThaiDate(CONFIG.startDate); }
+        function startTimer(){
+            stopTimer();
+            const s = new Date(CONFIG.startDate).getTime();
+            const updateTimer = () => {
+                const d = new Date().getTime() - s;
+                document.getElementById('t-days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+                document.getElementById('t-hours').innerText = Math.floor((d / (1000 * 60 * 60)) % 24);
+                document.getElementById('t-mins').innerText = Math.floor((d / 1000 / 60) % 60);
+                document.getElementById('t-secs').innerText = Math.floor((d / 1000) % 60);
+            };
+            updateTimer();
+            state.timerInterval = setInterval(updateTimer, 1000);
+            document.getElementById('start-date-label').innerText = "นับตั้งแต่วันแรกที่เราได้รู้จักกัน " + formatThaiDate(CONFIG.startDate);
+        }
 
         // Finale
         function playFinale() {
+            clearFinaleAnimations();
             const t1 = document.getElementById('ft-1');
             const t2 = document.getElementById('ft-2');
             const t3 = document.getElementById('ft-3');
@@ -1326,16 +1482,16 @@
 
             // 1. Text
             t1.style.animationDuration = '2s'; t1.classList.add('animate-write');
-            setTimeout(() => t1.classList.add('animate-fill'), 2000);
+            queueFinaleTimeout(() => t1.classList.add('animate-fill'), 2000);
 
-            setTimeout(() => { t2.style.animationDuration = '3s'; t2.classList.add('animate-write'); setTimeout(() => t2.classList.add('animate-fill'), 3000); }, 1800); 
-            setTimeout(() => { t3.style.animationDuration = '1.5s'; t3.classList.add('animate-write'); setTimeout(() => t3.classList.add('animate-fill'), 1500); }, 4500);
+            queueFinaleTimeout(() => { t2.style.animationDuration = '3s'; t2.classList.add('animate-write'); queueFinaleTimeout(() => t2.classList.add('animate-fill'), 3000); }, 1800);
+            queueFinaleTimeout(() => { t3.style.animationDuration = '1.5s'; t3.classList.add('animate-write'); queueFinaleTimeout(() => t3.classList.add('animate-fill'), 1500); }, 4500);
             
             // 2. Cartoon Enter
-            setTimeout(() => { scene.classList.add('act'); }, 6000);
+            queueFinaleTimeout(() => { scene.classList.add('act'); }, 6000);
 
             // 3. Bouquet & Fireworks
-            setTimeout(() => {
+            queueFinaleTimeout(() => {
                 bouquet.classList.add('show-bouquet');
                 confettiExplosion();
                 createBalloons();
