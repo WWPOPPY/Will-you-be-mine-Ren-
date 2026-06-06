@@ -477,8 +477,8 @@
                 <div class="music-disc-large" id="intro-disc">
                     <div class="music-disc-inner"><i class="fas fa-music" style="color:white; font-size: 1.5rem;"></i></div>
                 </div>
-                <h2 style="color: var(--secondary);">ถึง เร็น... 🌹</h2>
-                <p>จาก ไวท์ เองนะ<br>วันนี้มีคำถามสำคัญอยากจะถาม... ลองกดเข้าไปดูสิ</p>
+                <h2 style="color: var(--secondary);">ถึง เร็น...(อักษร) 🌹</h2>
+                <p>จากใครน้า... <br>วันนี้มีคำถามสำคัญอยากจะถาม... ลองกดเข้าไปดูสิ</p>
                 <div style="width: 100%;">
                     <button class="btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1.2rem;" onclick="startJourney()">
                         เปิดใจดูนะ 🤍
@@ -502,7 +502,7 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-hug', 'screen-quiz', 2)"><i class="fas fa-arrow-left"></i></button>
                 <h2>Mission 2: ภารกิจกอด ❤️</h2>
-                <p id="hug-instruction">กอดออนไลน์จากไวท์ 10 วินาที<br>เพื่อรับ "ของขวัญพิเศษ"!</p>
+                <p id="hug-instruction">หอมแก้มออนไลน์หรือจะสู่ หอมแก้มจริง <br>เพื่อรับ "ของขวัญพิเศษ"!</p>
                 
                 <div class="hug-anim-container">
                     <div id="hug-btn" class="hug-emoji" onclick="startHugMission()">🫂</div>
@@ -535,7 +535,7 @@
                 <h2>ความลับของเรา 🤫</h2>
                 <p>ขูดหน้าจอเพื่อดูรูปนะ</p>
                 <div id="scratch-wrapper">
-                    <iframe id="secret-img" src="https://drive.google.com/file/d/1N8MjK1PZWWFPrljT8H__118OyuEW1CxT/preview" allow="autoplay"></iframe>
+                    <iframe id="secret-img" src="https://drive.google.com/file/d/1vcKGnDYzaDJmF5UfXXJac40lQxdHpreb/preview" allow="autoplay"></iframe>
                     <canvas id="scratch-canvas"></canvas>
                 </div>
                 <h3 id="reveal-msg" style="opacity:0; color:var(--accent); font-size:1.3rem; transition:0.5s; margin-top:5px;">น่ารักที่สุดเลย!</h3>
@@ -573,9 +573,9 @@
                 <div class="letter-paper">
                     <span id="typewriter-text"></span><span class="cursor">|</span>
                 </div>
-                <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...คนที่ตั้งใจ(รัก)เร็นที่สุด (ไวท์เอง) ❤️</p>
+                <p style="margin-top:15px; font-weight:bold; color:var(--accent);"> พี่เร็นครับ... เป็นแฟนกับผมมั้ย? 💖</p>
                 <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 6)">
-                    ไปถ่ายรูปกัน 📸
+                    ตกลงคับ น้องไวท์
                 </button>
             </div>
         </div>
@@ -656,15 +656,15 @@
                 <p>กดเพื่อประทับตราสัญญาของไวท์</p>
                 <div class="promise-list">
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะรักและดูแลเร็นคนเดียว</span>
+                        <span>จะรักและดูแลผมคนเดียว</span>
                         <div class="stamp-mark"><i class="fas fa-heart"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะพาเร็นไปกินของอร่อยทุกที่</span>
+                        <span>จะพาผมไปกินของอร่อยทุกที่</span>
                         <div class="stamp-mark"><i class="fas fa-utensils"></i></div>
                     </div>
                     <div class="promise-item" onclick="togglePromise(this)">
-                        <span>จะไม่ดื้อกับเร็น (มั้งนะ)</span>
+                        <span>จะไม่ดื้อกับผม</span>
                         <div class="stamp-mark"><i class="fas fa-smile-wink"></i></div>
                     </div>
                 </div>
@@ -704,7 +704,7 @@
                     </div>
                     <div class="diary-page" style="width:50%; height:100%; position:absolute; top:0; left:50%; background:#fffcf5; border:1px solid #ddd; padding:10px; display:flex; justify-content:center; align-items:center; z-index:1; border-radius:0 5px 5px 0;">
                         <!-- EDIT: ข้อความในไดอารี่ -->
-                        <p>บันทึกของไวท์<br>ขอบคุณที่มีเร็นเข้ามา<br>ในชีวิตนะครับ ❤️</p>
+                        <p>บันทึกของผม<br>ขอบคุณที่มีพี่เร็นเข้ามา<br>ในชีวิตนะครับ ❤️</p>
                     </div>
                 </div>
                 <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-diary', 'screen-stay', 13)">ไปต่อ ➜</button>
@@ -716,9 +716,9 @@
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 12)"><i class="fas fa-arrow-left"></i></button>
                 <div class="couple-emoji">👨‍❤️‍👨</div>
-                <h2 style="font-size:2rem; color:var(--accent);">อยากมีเร็นอยู่ข้างๆ</h2>
+                <h2 style="font-size:2rem; color:var(--accent);">อยากมีพี่เร็นอยู่ข้างๆ</h2>
                 <p>ตลอดไปเลยนะ ❤️</p>
-                <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 14)">ดูเวลาของเรา ⏳</button>
+                <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 14)">เป็นแฟนกันแล้วนะ ⏳</button>
             </div>
         </div>
 
@@ -759,7 +759,7 @@
                 <!-- Bouquet Popup -->
                 <div id="bouquet-container" class="bouquet-wrapper">
                     <span class="bouquet-img">💐</span>
-                    <div class="bouquet-msg">เป็นแฟนกันนะ เร็น ❤️</div>
+                    <div class="bouquet-msg">เป็นแฟนกันนะ พี่เร็น ❤️</div>
                 </div>
             </div>
             <button class="btn-back" onclick="prevStep('screen-finale', 'screen-timer', 14)" style="top:30px; left:30px; color: #d62828;"><i class="fas fa-arrow-left"></i></button>
@@ -788,13 +788,13 @@
          *******************************************************/
         const CONFIG = {
             // 1. วันที่เริ่มรู้จักกัน (ปี-เดือน-วันTเวลา)
-            startDate: "2026-02-06T00:20:00", 
+            startDate: "2026-06-07T00:20:00",
 
             // 2. คำถามแฟนพันธุ์แท้ (แก้คำถาม, ตัวเลือก, และเลขข้อที่ถูก เริ่มนับจาก 0)
             quiz: [
-                { q: "ไวท์ชอบอะไรในตัวเร็นที่สุด?", opts: ["รอยยิ้ม", "ความใจดี", "ความน่ารัก", "ชอบทุกอย่างเลย!"], a: 3 },
-                { q: "ถ้าให้ไวท์เลือกไปเที่ยวกับเร็น อยากไปไหน?", opts: ["ภูเขา", "ทะเล", "คาเฟ่", "ไปไหนก็ได้ที่มีเร็น"], a: 3 },
-                { q: "ไวท์คิดถึงเร็นบ่อยแค่ไหน?", opts: ["บางเวลา", "ตอนตื่นนอน", "ก่อนนอน", "ตลอดยี่สิบสี่ชั่วโมง!"], a: 3 }
+                { q: "พี่เร็นชอบอะไรในตัวไวท์ที่สุด?", opts: ["รอยยิ้ม", "ความใจดี", "ความน่ารัก", "ชอบทุกอย่างเลย!"], a: 3 },
+                { q: "ถ้าให้พี่เร็นเลือกไปเที่ยวกับไวท์ อยากไปไหน?", opts: ["ภูเขา", "ทะเล", "คาเฟ่", "ไปไหนก็ได้ที่มีเร็น"], a: 3 },
+                { q: "พี่เร็นคิดถึงไวท์บ่อยแค่ไหน?", opts: ["บางเวลา", "ตอนตื่นนอน", "ก่อนนอน", "ตลอดยี่สิบสี่ชั่วโมง!"], a: 3 }
             ],
 
             // 3. รางวัลในกล่องสุ่ม (3 อย่าง)
@@ -807,22 +807,22 @@
             // 4. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ (รองรับ ratio รายรูป)
             gallery: [
                 { src: "IMG_7330.PNG", caption: "รูปของเรา 📸", type: "image" },
-                { src: "https://drive.google.com/file/d/1QbLz4aVkDaas7aEG1OGDRMfDhOTOrt1h/preview", caption: "เวลาอยู่กับเร็น ไวท์มีความสุขที่สุดเลย 🐤", ratio: "3/4", type: "video" },
-                { src: "https://drive.google.com/file/d/1j8KMs7GHle-p6AEHxzdWJKVhYJB2XCal/preview", caption: "ขอบคุณที่อยู่ข้างกันนะ ❤️", ratio: "3/4", type: "video" },
-                { src: "https://drive.google.com/file/d/1XX-nr5JPb7AKuvgqAkr-a6oKHNsco-Z_/preview", caption: "เร็นน่ารักที่สุดสำหรับไวท์เสมอ 🌹", type: "image" }
+                { src: "https://drive.google.com/file/d//preview", caption: "เวลาผมคุยกับพี่เร็น ผมมีความสุขที่สุดเลย 🐤", ratio: "3/4", type: "video" },
+                { src: "https://drive.google.com/file/d//preview", caption: "ขอบคุณที่อยู่ข้างกัน ❤️", ratio: "3/4", type: "video" },
+                { src: "https://drive.google.com/file/d//preview", caption: "พี่เร็นน่ารักที่สุดสำหรับผมเสมอ 🌹", type: "image" }
             ],
 
             // 5. คำถาม Deep Talk
             deepTalk: [
-                "อะไรคือสิ่งที่เร็นประทับใจในตัวไวท์บ้าง?",
-                "เร็นรู้สึกยังไงเวลาที่เราได้คุยกัน?",
-                "เร็นเคยคิดภาพอนาคตที่มีไวท์อยู่ด้วยไหม?",
-                "ถ้าวันนี้สถานะของเราเปลี่ยนไป เร็นพร้อมไหม?",
-                "ในสายตาเร็น ไวท์เป็นคนแบบไหน?"
+                "อะไรคือสิ่งที่เร็นประทับใจในตัวผมบ้าง?",
+                "พี่เร็นรู้สึกยังไงเวลาที่เราได้คุยกัน?",
+                "พี่เร็นเคยคิดภาพอนาคตที่มีผมอยู่ด้วยไหม?",
+                "ถ้าวันนี้สถานะของเราเปลี่ยนไป พี่เร็นพร้อมไหม?",
+                "ในสายตาพี่เร็น ผมเป็นคนแบบไหน?"
             ],
 
             // 6. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
-            letter: "ถึง เร็น... ไวท์เองนะ เร็นรู้ไหมว่าตั้งแต่มีเร็นเข้ามาในชีวิต ทุกๆ วันของไวท์ก็เปลี่ยนไป ไวท์ยิ้มบ่อยขึ้น มีความสุขกับเรื่องเล็กๆ น้อยๆ มากขึ้น แค่ได้คุยกัน ได้ยินเสียงเร็น ไวท์ก็รู้สึกดีมากๆ แล้ว ไวท์อาจจะไม่ใช่คนที่พูดความรู้สึกเก่งนัก แต่ทุกสิ่งที่ไวท์ทำให้ ไวท์ตั้งใจทำเพื่อเร็นจริงๆ นะ ขอบคุณที่เข้ามาเป็นความสบายใจ เป็นรอยยิ้ม และเป็นความสดใสในโลกของไวท์... วันนี้ไวท์ไม่อยากเป็นแค่คนคุย หรือเป็นแค่พี่น้องแล้ว ไวท์อยากดูแลเร็นให้ดีกว่านี้ อยากมีเร็นอยู่ข้างๆ ในทุกๆ วัน... เร็นครับ... เป็นแฟนกับไวท์นะ?"
+            letter: ""นี่ใครเนี่ย... คนโรคจิตคนนึงป่ะ? 😅 เอาจริงๆ ที่ผมพูดว่าคบกันเลยมั้ย ผมไม่ได้พูดเล่นนะเว้ย ถ้ามันใช่ คุยนานไปก็เสียเวลาเปล่าวะ พี่ว่ามั้ย? ไม่รู้ทำไมตัวเองถึงยอมให้คนโรคจิตคนนี้เข้ามาในชีวิตด้วยเนี่ย... แต่ก็ดีแล้วแหละ เพราะการมีพี่อยู่ในทุกๆ วัน มันทำให้ผมโคตรแฮปปี้เลย วันนี้ผมไม่อยากเป็นแค่คนคุย หรือเป็นแค่พี่น้องแล้ว... ผมอยากให้พี่มาดูแลผม อยากมีพี่เร็นอยู่ข้างๆ ในทุกๆ วัน
         };
 
         /*******************************************************
@@ -1014,7 +1014,7 @@
 
         function loadQuiz(){ 
             if(state.quizIndex>=CONFIG.quiz.length){ 
-                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! ภูมิใจในตัวเธอ 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',2)">ไปกันต่อเลย ➜</button>`;
+                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! ภูมิใจในตัวว่าที่(แฟน) 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',2)">ไปกันต่อเลย ➜</button>`;
                 fireConfetti(); return; 
             }
             const q=CONFIG.quiz[state.quizIndex]; document.getElementById('quiz-q').innerText=q.q;
@@ -1301,7 +1301,15 @@
         function plantFlower(e){ const f=document.createElement('div'); f.className='flower'; f.innerText=['🌻','🌷','🌹','🌸','🌺'][Math.floor(Math.random()*5)]; const r=document.getElementById('garden-area').getBoundingClientRect(); f.style.left=(e.clientX-r.left-15)+'px'; document.getElementById('garden-area').appendChild(f); }
         function popStar(){ const msgs=["รักนะ","คิดถึง","คนเก่ง","จุ๊บๆ"]; document.getElementById('wish-text').innerText=msgs[Math.floor(Math.random()*msgs.length)]; fireConfetti(); }
 
-        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่วันแรกที่เราได้รู้จักกัน "+new Date(CONFIG.startDate).toLocaleDateString('th-TH'); }
+        function formatThaiDate(dateValue) {
+            const date = new Date(dateValue);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear() + 543;
+            return `${day}/${month}/${year}`;
+        }
+
+        function startTimer(){ const s=new Date(CONFIG.startDate).getTime(); setInterval(()=>{ const d=new Date().getTime()-s; document.getElementById('t-days').innerText=Math.floor(d/(1000*60*60*24)); document.getElementById('t-hours').innerText=Math.floor((d/(1000*60*60))%24); document.getElementById('t-mins').innerText=Math.floor((d/1000/60)%60); document.getElementById('t-secs').innerText=Math.floor((d/1000)%60); },1000); document.getElementById('start-date-label').innerText="นับตั้งแต่วันแรกที่เราได้รู้จักกัน "+formatThaiDate(CONFIG.startDate); }
 
         // Finale
         function playFinale() {
