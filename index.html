@@ -185,16 +185,6 @@
         .music-disc-inner { width: 40px; height: 40px; background: var(--secondary); border-radius: 50%; display: flex; justify-content: center; align-items: center; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* LOCK */
-        .pin-display { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; }
-        .pin-dot { width: 12px; height: 12px; background: #ddd; border-radius: 50%; transition: 0.2s; }
-        .pin-dot.filled { background: var(--secondary); transform: scale(1.3); }
-        .pin-dot.error { background: #ef476f; animation: shake 0.3s; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 5px; }
-        .num-btn { width: 55px; height: 55px; border-radius: 50%; border: none; background: white; font-size: 1.3rem; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer; }
-        .num-btn:active { background: #eee; transform: scale(0.95); }
-
         /* QUIZ */
         .quiz-option { background: white; padding: 12px; border-radius: 15px; margin-bottom: 10px; cursor: pointer; text-align: left; font-size: 1rem; border: 2px solid transparent; width: 100%; transition: 0.2s; }
         .quiz-option:hover { border-color: var(--secondary); color: var(--secondary); }
@@ -466,12 +456,11 @@
     
     <!-- Music & Steps -->
     <div class="step-dots" id="step-indicator">
-        <!-- 17 Dots -->
+        <!-- 16 Dots -->
         <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
         <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
         <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
         <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
-        <div class="step-dot"></div>
     </div>
 
     <div id="music-controller">
@@ -499,37 +488,17 @@
             </div>
         </div>
 
-        <!-- 2. LOCK -->
-        <div id="screen-lock" class="screen">
-            <div class="card">
-                <button class="btn-back" onclick="navigate('screen-lock', 'screen-intro', 0)"><i class="fas fa-chevron-left"></i></button>
-                <i class="fas fa-lock lock-icon" style="font-size:2.5rem; margin-bottom:10px; color:var(--secondary);"></i>
-                <h2>ใส่รหัสหน่อยนะ</h2>
-                <p>Hint: วันเกิดนู่ยิ้ม</p>
-                <div class="pin-display" id="pin-dots">
-                    <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
-                    <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
-                </div>
-                <div class="numpad">
-                    <button class="num-btn" onclick="typePin(1)">1</button><button class="num-btn" onclick="typePin(2)">2</button><button class="num-btn" onclick="typePin(3)">3</button>
-                    <button class="num-btn" onclick="typePin(4)">4</button><button class="num-btn" onclick="typePin(5)">5</button><button class="num-btn" onclick="typePin(6)">6</button>
-                    <button class="num-btn" onclick="typePin(7)">7</button><button class="num-btn" onclick="typePin(8)">8</button><button class="num-btn" onclick="typePin(9)">9</button>
-                    <button class="num-btn" style="opacity:0; pointer-events:none;"></button><button class="num-btn" onclick="typePin(0)">0</button><button class="num-btn" onclick="deletePin()"><i class="fas fa-backspace"></i></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. QUIZ -->
+        <!-- 2. QUIZ -->
         <div id="screen-quiz" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-quiz', 'screen-lock', 1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-quiz', 'screen-intro', 0)"><i class="fas fa-chevron-left"></i></button>
                 <h2>Mission 1: วัดใจ</h2>
                 <h3 id="quiz-q" style="color: var(--accent); margin: 20px 0; font-size: 1.3rem;">คำถาม...</h3>
                 <div id="quiz-opts" style="width: 100%;"></div>
             </div>
         </div>
 
-        <!-- 4. HUG & GACHAPON -->
+        <!-- 3. HUG & GACHAPON -->
         <div id="screen-hug" class="screen">
             <div class="card">
                 <button class="btn-back" onclick="navigate('screen-hug', 'screen-quiz', 2)"><i class="fas fa-arrow-left"></i></button>
@@ -554,16 +523,16 @@
 
                 <h3 id="hug-msg" style="color:var(--secondary); font-size:1.4rem; opacity:0; margin-top:15px; min-height: 30px;"></h3>
                 
-                <button id="btn-hug-next" class="btn-primary" style="display: none;" onclick="navigate('screen-hug', 'screen-scratch', 4)">
+                <button id="btn-hug-next" class="btn-primary" style="display: none;" onclick="navigate('screen-hug', 'screen-scratch', 3)">
                     ยังมีอีกนะ... <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
 
-        <!-- 5. SCRATCH -->
+        <!-- 4. SCRATCH -->
         <div id="screen-scratch" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-scratch', 'screen-hug', 3)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-scratch', 'screen-hug', 2)"><i class="fas fa-arrow-left"></i></button>
                 <h2>ความลับของเรา 🤫</h2>
                 <p>ขูดหน้าจอเพื่อดูรูปนะ</p>
                 <div id="scratch-wrapper">
@@ -571,16 +540,16 @@
                     <canvas id="scratch-canvas"></canvas>
                 </div>
                 <h3 id="reveal-msg" style="opacity:0; color:var(--accent); font-size:1.3rem; transition:0.5s; margin-top:5px;">น่ารักที่สุดเลย!</h3>
-                <button id="btn-scratch-next" class="btn-primary" style="display: none; margin-top: 10px;" onclick="navigate('screen-scratch', 'screen-cake', 5)">
+                <button id="btn-scratch-next" class="btn-primary" style="display: none; margin-top: 10px;" onclick="navigate('screen-scratch', 'screen-cake', 4)">
                     ยังมีอีกนะ... <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
 
-        <!-- 6. CAKE -->
+        <!-- 5. CAKE -->
         <div id="screen-cake" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-cake', 'screen-scratch', 4)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-cake', 'screen-scratch', 3)"><i class="fas fa-arrow-left"></i></button>
                 <h2>Mission 4: แต่งหน้าเค้ก 🎂</h2>
                 <div class="cake-stage" id="cake-area"><i class="fas fa-birthday-cake base-cake" id="base-cake"></i></div>
                 <div class="tool-bar">
@@ -591,32 +560,32 @@
                     <button class="tool-btn" onclick="addTop('🕯️')">🕯️</button>
                     <button class="tool-btn" onclick="document.getElementById('cake-area').innerHTML='<i class=\'fas fa-birthday-cake base-cake\' id=\'base-cake\'></i>'"><i class="fas fa-trash"></i></button>
                 </div>
-                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-cake', 'screen-letter', 6)">
+                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-cake', 'screen-letter', 5)">
                     แต่งเสร็จแล้ว <i class="fas fa-check"></i>
                 </button>
             </div>
         </div>
 
-        <!-- 7. LETTER -->
+        <!-- 6. LETTER -->
         <div id="screen-letter" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-letter', 'screen-cake', 5)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-letter', 'screen-cake', 4)"><i class="fas fa-arrow-left"></i></button>
                 <h2>จดหมายถึงคนอ่าน ที่ชื่อ ก้อง </h2>
                 <div class="letter-paper">
                     <span id="typewriter-text"></span><span class="cursor">|</span>
                 </div>
                 <p style="margin-top:15px; font-weight:bold; color:var(--accent);">จาก...คนที่ตั้งใจ(รัก)ก้องที่สุด ❤️</p>
-                <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 7)">
+                <button class="btn-primary" onclick="navigate('screen-letter', 'screen-camera', 6)">
                     ไปถ่ายรูปกัน 📸
                 </button>
             </div>
         </div>
 
-        <!-- 8. REAL CAMERA (FIXED FOR REALISTIC SLIDING EFFECT) -->
+        <!-- 7. REAL CAMERA (FIXED FOR REALISTIC SLIDING EFFECT) -->
         <div id="screen-camera" class="screen">
             <div class="flash-overlay" id="camera-flash"></div>
             <div class="card" style="background:transparent; border:none; box-shadow:none;">
-                <button class="btn-back" onclick="navigate('screen-camera', 'screen-letter', 6)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-camera', 'screen-letter', 5)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
                 <h2 style="color:var(--dark-text); font-size: 2.5rem; text-shadow: 0 0 10px white; margin-bottom: 20px;">ยิ้มหวานๆ นะ 📸</h2>
                 
                 <div class="camera-wrapper" id="camera-wrapper">
@@ -642,10 +611,10 @@
             </div>
         </div>
 
-        <!-- 9. MEMORIES -->
+        <!-- 8. MEMORIES -->
         <div id="screen-memories" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-memories', 'screen-camera', 7)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-memories', 'screen-camera', 6)"><i class="fas fa-arrow-left"></i></button>
                 <h2 style="font-family:'Pacifico'; color: var(--accent);">Our Memories</h2>
                 <div class="polaroid-wrapper">
                     <div class="polaroid-media" id="polaroid-media">
@@ -658,16 +627,16 @@
                     <button class="nav-btn" onclick="changeSlide(-1)"><i class="fas fa-arrow-left"></i></button>
                     <button class="nav-btn" onclick="changeSlide(1)"><i class="fas fa-arrow-right"></i></button>
                 </div>
-                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-memories', 'screen-deeptalk', 9)">
+                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-memories', 'screen-deeptalk', 8)">
                     ไปต่อเลย <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>
 
-        <!-- 10. DEEP TALK -->
+        <!-- 9. DEEP TALK -->
         <div id="screen-deeptalk" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-deeptalk', 'screen-memories', 8)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-deeptalk', 'screen-memories', 7)"><i class="fas fa-arrow-left"></i></button>
                 <h2>Deep Talk ❤️</h2>
                 <div class="deeptalk-wrapper">
                     <div class="talk-card-single" id="talk-card">
@@ -676,14 +645,14 @@
                     </div>
                 </div>
                 <button class="btn-outline" id="btn-next-talk" onclick="nextDeepTalk()">ข้อถัดไป <i class="fas fa-arrow-right"></i></button>
-                <button class="btn-primary" id="btn-finish-talk" style="display:none;" onclick="navigate('screen-deeptalk', 'screen-promise', 10)">ไปสัญญาใจกัน ➜</button>
+                <button class="btn-primary" id="btn-finish-talk" style="display:none;" onclick="navigate('screen-deeptalk', 'screen-promise', 9)">ไปสัญญาใจกัน ➜</button>
             </div>
         </div>
 
-        <!-- 11. PROMISE -->
+        <!-- 10. PROMISE -->
         <div id="screen-promise" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-promise', 'screen-deeptalk', 9)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-promise', 'screen-deeptalk', 8)"><i class="fas fa-arrow-left"></i></button>
                 <h2>สัญญาใจ 🤙</h2>
                 <p>กดเพื่อประทับตราสัญญา</p>
                 <div class="promise-list">
@@ -700,36 +669,36 @@
                         <div class="stamp-mark"><i class="fas fa-smile-wink"></i></div>
                     </div>
                 </div>
-                <button id="btn-promise-next" class="btn-primary" style="opacity:0.5; pointer-events:none;" onclick="navigate('screen-promise', 'screen-garden', 11)">สัญญาแล้วนะ ➜</button>
+                <button id="btn-promise-next" class="btn-primary" style="opacity:0.5; pointer-events:none;" onclick="navigate('screen-promise', 'screen-garden', 10)">สัญญาแล้วนะ ➜</button>
             </div>
         </div>
 
-        <!-- 12. GARDEN -->
+        <!-- 11. GARDEN -->
         <div id="screen-garden" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-garden', 'screen-promise', 10)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-garden', 'screen-promise', 9)"><i class="fas fa-arrow-left"></i></button>
                 <h2>ปลูกรัก 🌻</h2>
                 <p style="margin-bottom:10px;">จิ้มในแปลงเพื่อปลูกดอกไม้</p>
                 <div class="garden-area" id="garden-area" onclick="plantFlower(event)"><div class="sun" style="position:absolute; top:10px; right:10px; font-size:2rem;">☀️</div></div>
-                <button class="btn-primary" onclick="navigate('screen-garden', 'screen-wishes', 12)">สวยจัง ➜</button>
+                <button class="btn-primary" onclick="navigate('screen-garden', 'screen-wishes', 11)">สวยจัง ➜</button>
             </div>
         </div>
 
-        <!-- 13. WISHES -->
+        <!-- 12. WISHES -->
         <div id="screen-wishes" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-wishes', 'screen-garden', 11)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-wishes', 'screen-garden', 10)"><i class="fas fa-arrow-left"></i></button>
                 <h2>โหลเก็บดาว ⭐</h2>
                 <div class="jar-container"><div class="jar" onclick="popStar()">🏺</div></div>
                 <h3 id="wish-text" style="height:30px; color:var(--accent);"></h3>
-                <button class="btn-primary" style="margin-top:10px;" onclick="navigate('screen-wishes', 'screen-diary', 13)">ไปต่อ ➜</button>
+                <button class="btn-primary" style="margin-top:10px;" onclick="navigate('screen-wishes', 'screen-diary', 12)">ไปต่อ ➜</button>
             </div>
         </div>
 
-        <!-- 14. DIARY -->
+        <!-- 13. DIARY -->
         <div id="screen-diary" class="screen">
             <div class="card" style="background:transparent; box-shadow:none; border:none;">
-                <button class="btn-back" onclick="navigate('screen-diary', 'screen-wishes', 12)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-diary', 'screen-wishes', 11)" style="background:white;"><i class="fas fa-arrow-left"></i></button>
                 <div class="diary-book" onclick="toggleDiaryBook(this)">
                     <div class="diary-cover" style="width:50%; height:100%; position:absolute; top:0; left:0; background:var(--secondary); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; border-radius:5px 0 0 5px; z-index:2; transition:transform 1s; transform-origin:left center;">
                         <h2>Our Diary</h2><p style="color:white;">Click to Open</p>
@@ -739,25 +708,25 @@
                         <p>วันนี้เป็นวันที่ดีที่สุดเลย<br>ขอบคุณที่มีก้องเข้ามา<br>ในชีวิตครับ ❤️</p>
                     </div>
                 </div>
-                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-diary', 'screen-stay', 14)">ไปต่อ ➜</button>
+                <button class="btn-primary" style="margin-top:20px;" onclick="navigate('screen-diary', 'screen-stay', 13)">ไปต่อ ➜</button>
             </div>
         </div>
 
-        <!-- 15. STAY -->
+        <!-- 14. STAY -->
         <div id="screen-stay" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 13)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-stay', 'screen-diary', 12)"><i class="fas fa-arrow-left"></i></button>
                 <div class="couple-emoji">👨‍❤️‍👨</div>
                 <h2 style="font-size:2rem; color:var(--accent);">อยู่ด้วยกันนานๆ นะ</h2>
                 <p>น่ารักที่สุดเลยยยย ❤️</p>
-                <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 15)">ดูเวลาของเรา ⏳</button>
+                <button class="btn-primary" onclick="navigate('screen-stay', 'screen-timer', 14)">ดูเวลาของเรา ⏳</button>
             </div>
         </div>
 
-        <!-- 16. TIMER -->
+        <!-- 15. TIMER -->
         <div id="screen-timer" class="screen">
             <div class="card">
-                <button class="btn-back" onclick="navigate('screen-timer', 'screen-stay', 14)"><i class="fas fa-arrow-left"></i></button>
+                <button class="btn-back" onclick="navigate('screen-timer', 'screen-stay', 13)"><i class="fas fa-arrow-left"></i></button>
                 <i class="fas fa-hourglass-start" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px; animation: float 3s infinite;"></i>
                 <h2>เวลาของเรา</h2>
                 <div class="timer-grid">
@@ -767,11 +736,11 @@
                     <div class="timer-box"><span class="timer-val" id="t-secs">0</span><span>วิ</span></div>
                 </div>
                 <p id="start-date-label">นับตั้งแต่...</p>
-                <button class="btn-primary" onclick="navigate('screen-timer', 'screen-finale', 16)">ฉลอง! 🎉</button>
+                <button class="btn-primary" onclick="navigate('screen-timer', 'screen-finale', 15)">ฉลอง! 🎉</button>
             </div>
         </div>
 
-        <!-- 17. FINALE -->
+        <!-- 16. FINALE -->
         <div id="screen-finale" class="screen">
             <div class="finale-content">
                 <!-- SVG Handwriting -->
@@ -794,7 +763,7 @@
                     <div class="bouquet-msg">สำหรับเธอคนเดียว ❤️</div>
                 </div>
             </div>
-            <button class="btn-back" onclick="prevStep('screen-finale', 'screen-timer', 15)" style="top:30px; left:30px; color: #d62828;"><i class="fas fa-arrow-left"></i></button>
+            <button class="btn-back" onclick="prevStep('screen-finale', 'screen-timer', 14)" style="top:30px; left:30px; color: #d62828;"><i class="fas fa-arrow-left"></i></button>
         </div>
 
     </div>
@@ -805,7 +774,7 @@
         class="hidden-player"
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/M8Ao4NeNhFE?enablejsapi=1&playsinline=1&controls=0&rel=0&loop=1&playlist=M8Ao4NeNhFE"
+        src="https://www.youtube-nocookie.com/embed/EBJf0slhj5A?si=cLxTrjD5sab6CodS&start=35&enablejsapi=1&playsinline=1&controls=0&rel=0&loop=1&playlist=EBJf0slhj5A"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -819,27 +788,24 @@
          * แก้ไขข้อมูลด้านล่างนี้ได้เลยครับ (แก้ในเครื่องหมาย "")
          *******************************************************/
         const CONFIG = {
-            // 1. รหัสผ่านเข้าสู่ระบบ (เช่น วันเกิด)
-            passcode: "13092549", 
-            
-            // 2. วันที่เริ่มคบกัน (ปี-เดือน-วันTเวลา)
+            // 1. วันที่เริ่มคบกัน (ปี-เดือน-วันTเวลา)
             startDate: "2026-02-06T00:20:00", 
 
-            // 3. คำถามแฟนพันธุ์แท้ (แก้คำถาม, ตัวเลือก, และเลขข้อที่ถูก เริ่มนับจาก 0)
+            // 2. คำถามแฟนพันธุ์แท้ (แก้คำถาม, ตัวเลือก, และเลขข้อที่ถูก เริ่มนับจาก 0)
             quiz: [
                 { q: "เราเจอกันครั้งแรกที่ไหน?", opts: ["โรงเรียน", "ห้าง", "ทะเล", "สวนสาธารณะ"], a: 3 },
                 { q: "น้ำดื่มที่ไวท์ชอบที่สุด?", opts: ["Purra", "Ichitan pH Plus (อิชิตัน น้ำด่าง)", "Singha", "Mont Fleur"], a: 1 },
                 { q: "เดทแรกเราไปทำอะไรกัน?", opts: ["ปั่นเรือเป็ด", "เดินห้าง", "ไปทะเล", "ขับรถเล่น"], a: 0 }
             ],
 
-            // 4. รางวัลในกล่องสุ่ม (3 อย่าง)
+            // 3. รางวัลในกล่องสุ่ม (3 อย่าง)
             prizes: [
                 "จุ๊บหน่อย! ❤️", 
                 "พาไปกินของอร่อย 🍱", 
                 "พาไปเที่ยว 1 ที่ 🏖️"
             ],
 
-            // 5. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ (รองรับ ratio รายรูป)
+            // 4. รูปในแกลเลอรี่ (Memories) - ใส่ลิ้งค์รูปภาพ (รองรับ ratio รายรูป)
             gallery: [
                 { src: "IMG_7330.PNG", caption: "รูปคู่ใบแรกของเรา 📸", type: "image" },
                 { src: "https://drive.google.com/file/d/1QbLz4aVkDaas7aEG1OGDRMfDhOTOrt1h/preview", caption: "ทริปไปปั้นเป็ดกันครั้งแรก 🐤", ratio: "3/4", type: "video" },
@@ -847,7 +813,7 @@
                 { src: "https://drive.google.com/file/d/1XX-nr5JPb7AKuvgqAkr-a6oKHNsco-Z_/preview", caption: "ก้องน่ารักที่สุดเลย 🌹", type: "image" }
             ],
 
-            // 6. คำถาม Deep Talk
+            // 5. คำถาม Deep Talk
             deepTalk: [
                 "อะไรคือคุณสมบัติที่สำคัญที่สุดที่เราสองคนมองหาในความสัมพันธ์?",
                 "เราสองคน เชื่อว่าการให้อภัยในความสัมพันธ์เป็นเรื่องสำคัญแค่ไหน?",
@@ -856,7 +822,7 @@
                 "ในสายตาอีกฝ่ายเป็นคนแบบไหน?"
             ],
 
-            // 7. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
+            // 6. จดหมาย (พิมพ์ข้อความยาวๆ ได้เลย)
             letter: "สุขสันวันวาเลนไทน์นะก้อง ก้องคงรู้อยู่แล้วว่าไวท์ไม่ใช่คนพูดหวานเก่ง ไม่ถนัดเรื่องแสดงความรู้สึกซึ้งๆ เท่าไหร่ บางทีอาจจะดูนิ่งไปบ้าง แต่ไวท์อยากให้ก้องรู้นะครับว่า... ในความนิ่งนั้น ข้างในมันเต็มไปด้วยความรู้สึกดีๆ เสมอ เชื่อไหม... ทุกครั้งที่เราได้โทรคุยกัน แค่ได้ยินเสียงก้อง มันเหมือนระยะทางหรือความห่างไกลมันหายไปหมดเลย มันเหมือนก้องมานั่งอยู่ข้างๆ ไวท์ตรงนี้จริงๆ มันเป็นช่วงเวลาที่ไวท์มีความสุขและสบายใจที่สุด ไวท์ชอบเวลาก้องยิ้มนะ เพราะรอยยิ้มของก้องมันเหมาะสมที่สุดแล้วกับคำว่า เธฮคือความสดใสของโลกใบนี้ ไม่ว่าวันนั้นไวท์จะเจออะไรมา แค่เห็นก้องยิ้ม โลกของไวท์มันก็ดู อ่อนโยน ขึ้นทันที ขอบคุณจริงๆ ที่เข้ามาเป็นความสบายใจและเป็นพลังบวกให้กัน ไม่รู้ว่าอนาคตข้างหน้าจะเป็นยังไง ไวท์ไม่อยากสัญญาในสิ่งที่ยังมาไม่ถึง แต่สิ่งที่ไวท์มั่นใจที่สุดใน วันนี้ คือ... ไวท์อยากมีก้องอยู่ข้างๆ แบบนี้ไปเรื่อยๆ ภูมิใจในตัวก้องเสมอนะครับ เก่งมากแล้วนะ ยิ้มให้ไวท์ดูบ่อยๆ นะขอบคุณที่เข้ามาเป็นความสดใสในโลกของไวทืนะ แล้วก้องล่ะครับ... ในโลกของก้อง ยังอยากมีไวท์อยู่ข้างๆ แบบนี้มั้ย?"
         };
 
@@ -864,7 +830,7 @@
          * END CONFIGURATION (อย่าแก้โค้ดด้านล่างถ้าไม่จำเป็น)
          *******************************************************/
 
-        let state = { pin: "", quizIndex: 0, promiseCount: 0, talkIndex: 0, cameraStream: null };
+        let state = { quizIndex: 0, promiseCount: 0, talkIndex: 0, cameraStream: null };
 
         // Global Effects
         document.addEventListener('click', (e) => {
@@ -886,6 +852,19 @@
         let playerReady = false;
         let pendingPlay = false;
 
+        function getPlayerOrigin() {
+            if (!playerFrame) return 'https://www.youtube.com';
+            try {
+                return new URL(playerFrame.src).origin;
+            } catch (e) {
+                return 'https://www.youtube.com';
+            }
+        }
+
+        function isTrustedYouTubeOrigin(origin) {
+            return origin === 'https://www.youtube.com' || origin === 'https://www.youtube-nocookie.com';
+        }
+
         function setMusicButtonState(playing) {
             const btn = document.getElementById('music-status');
             const icon = document.querySelector('.music-btn-top i');
@@ -905,7 +884,7 @@
             if (!playerFrame || !playerFrame.contentWindow) return;
             playerFrame.contentWindow.postMessage(
                 JSON.stringify({ event: 'command', func, args }),
-                'https://www.youtube.com'
+                getPlayerOrigin()
             );
         }
 
@@ -960,13 +939,13 @@
                 if (!playerFrame || !playerFrame.contentWindow) return;
                 playerFrame.contentWindow.postMessage(
                     JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }),
-                    'https://www.youtube.com'
+                    getPlayerOrigin()
                 );
             });
         });
 
         window.addEventListener('message', (event) => {
-            if (event.origin !== 'https://www.youtube.com') return;
+            if (!isTrustedYouTubeOrigin(event.origin)) return;
             let data = event.data;
             if (typeof data === 'string') {
                 try { data = JSON.parse(data); } catch (e) { return; }
@@ -982,7 +961,7 @@
         // Start Journey Function (Triggers Play + Navigation)
         function startJourney() {
             playMusic();
-            navigate('screen-intro', 'screen-lock', 1); // Move to next screen
+            navigate('screen-intro', 'screen-quiz', 1); // Move to next screen
         }
 
         // Audio Toggle
@@ -1034,15 +1013,9 @@
             document.querySelectorAll('.step-dot').forEach((d,i)=>d.classList.toggle('active',i<=s));
         }
 
-        // Logic
-        function typePin(n){ if(state.pin.length<8){ state.pin+=n; updatePinDots(); if(state.pin.length===8) checkPin(); } }
-        function deletePin(){ state.pin=state.pin.slice(0,-1); updatePinDots(); }
-        function updatePinDots(){ document.querySelectorAll('.pin-dot').forEach((d,i)=>{ d.classList.toggle('filled',i<state.pin.length); d.classList.remove('error'); }); }
-        function checkPin(){ if(state.pin===CONFIG.passcode) setTimeout(()=>navigate('screen-lock','screen-quiz',2),300); else{ document.querySelectorAll('.pin-dot').forEach(d=>d.classList.add('error')); setTimeout(()=>{state.pin="";updatePinDots();},500); } }
-
         function loadQuiz(){ 
             if(state.quizIndex>=CONFIG.quiz.length){ 
-                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! ภูมิใจในตัวเธอ 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',3)">ไปกันต่อเลย ➜</button>`; 
+                document.getElementById('screen-quiz').querySelector('.card').innerHTML=`<h2>เก่งมาก! ภูมิใจในตัวเธอ 🎉</h2><button class="btn-primary" onclick="navigate('screen-quiz','screen-hug',2)">ไปกันต่อเลย ➜</button>`;
                 fireConfetti(); return; 
             }
             const q=CONFIG.quiz[state.quizIndex]; document.getElementById('quiz-q').innerText=q.q;
@@ -1197,7 +1170,7 @@
                 // Stop camera to save battery after taking photo
                 setTimeout(() => {
                     if (status) status.innerText = "ปริ้นเสร็จแล้ว 💖";
-                    navigate('screen-camera', 'screen-memories', 8);
+                    navigate('screen-camera', 'screen-memories', 7);
                     if (shutter) shutter.disabled = false;
                     wrapper.classList.remove('printing-active');
                     if (status) status.classList.remove('show');
@@ -1429,4 +1402,3 @@
     
 </body>
 </html>
-
